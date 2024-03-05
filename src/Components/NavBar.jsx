@@ -13,7 +13,7 @@ export default function NavBar() {
     const [openMenu , setOpenMenu] = useState(true)
   return (
    
-    <div className='w-full max-w-screen-2xl items-center mx-auto p-4'>
+    <div className='w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'>
     <div className="flex justify-between p-6">
     <div className="order-2 md:order-none">
     <Link to="/" >
