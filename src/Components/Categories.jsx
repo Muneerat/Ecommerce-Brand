@@ -47,7 +47,7 @@ export default function Categories() {
         {
             categories.map((category, index) => {
                 return (
-                    <div key={index} className='border border-slate-300 w-4/6 h- items-center justify-center text-center p-3 hover:bg-primary'>
+                    <div key={index} className='bg-white border border-slate-300 w-4/6 h- items-center justify-center text-center p-3 hover:bg-primary'>
                      <img src={imgCategories[category]} alt={category} className='w-10 h-10 flex justify-center items-center m-auto' /> 
                         <h1 className='p-2 capitalize' >{category}</h1>
                     </div>

@@ -12,14 +12,14 @@ export default function ProductCard({
 
     const [isHover, setHover] = useState(null);
   return (
-    <div key={key}>
+    <div key={key} >
     <Link to={`${product.id}`}>
-    <div className=' shadow-xl relative h-3/4'
+    <div className=' shadow-xl relative h-3/4 bg-white'
     onMouseEnter={() => setHover(key)}
       onMouseLeave={() => setHover(null)}>
-        <div className='right-4 absolute'>
-        <FaRegHeart className='my-3'/>
-        <HiEye />
+        <div className='right-4 absolute text-primary '>
+        <FaRegHeart className='my-3 hover:text-black'/>
+        <HiEye className='my-3 hover:text-black ' />
     </div>
     <div className='flex justify-center pt-5'>
       <img className=' w-2/4 p-3 flex ' src={product.image} alt={product.title} />

@@ -30,7 +30,7 @@ export default function SingleProduct() {
                   <HiEye />
               </div> */}
               <div className='flex justify-center pt-5'>
-                <img className=' w-2/4 p-3 flex ' src={product.image} alt={product.title} />
+                <img className=' w-1/4 p-3 flex ' src={product.image} alt={product.title} />
               </div>
            
                 {/* { isHover == index && <button className='absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white'>Add to cart</button>} */}
@@ -38,6 +38,7 @@ export default function SingleProduct() {
             <div className='p-3'>
             <p>{product?.title}</p>
             <p className='text-slate-400'>${product.price}</p>
+            {/* <p>{product.description}</p> */}
             </div>
           
             </div>
