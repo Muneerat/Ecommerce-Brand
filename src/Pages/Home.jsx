@@ -5,6 +5,9 @@ import BgImg from '../assets/Banner-img.png'
 import Button from '../Components/Button';
 import Tabs from '../Components/Tabs';
 import LimitedProducts from '../Components/LimitedProducts';
+import phone from '../assets/phone.png';
+import TextHeader from '../Components/textHeader';
+import OurProduct from '../Components/OurProduct';
 
 
 export default function () {
@@ -36,6 +39,15 @@ export default function () {
         <Tabs text="Categories" />
         <Categories />      
       </div>
+      <div>
+        <Tabs text="Our Products" />
+        <TextHeader text='Explore Our Products'/>
+        <OurProduct />
+      </div>
+      {/* <div className='w-full flex bg-black'>
+        <div className='w-3/6 text-white'>Hello Neerat</div>
+        <div className='h-[70vh] bg-cover bg-center w-3/6' style={{ backgroundImage: `url(${phone})` }}></div>
+      </div> */}
 
     </Layouts>
   )
