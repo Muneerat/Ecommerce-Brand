@@ -26,7 +26,9 @@ export default function () {
             </h1>
             <h2 className='font-bold pt-3  text-7xl '>Electronic items</h2>
            
-           <Button text='Learn more' />
+           <Button 
+               text='Learn more'
+               className='text-primary bg-white ' />
            </div>
            
       </div>
