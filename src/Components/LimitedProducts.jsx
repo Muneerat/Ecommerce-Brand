@@ -1,34 +1,41 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import ProductCard from './ProductCard';
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import ProductCard from "./ProductCard";
+import { AppContext } from "../Contexts/AppContent";
+import Loading from "./Loading";
 
 export default function LimitedProducts() {
-    const [limitProduct, setLimitProduct] = useState([]);
-    const [isHover, setHover] = useState(null);
+  const [limitProduct, setLimitProduct] = useState([]);
+  const [isHover, setHover] = useState(null);
+  const [loading, setLoading] = useState(false);
+  // const {loading, setLoading} = useContext(AppContext);
 
-
-    const getLimitProduct = () => {
-        axios.get('https://fakestoreapi.com/products?limit=5')
-        .then(res => {
-              setLimitProduct(res.data)
-        })
-        .catch((err) => {
-             console.log(err)
-         });
-        
-    }
-    useEffect(() => {
-        getLimitProduct();
-    }),[];
+  const getLimitProduct = () => {
+    setLoading(true);
+    axios
+      .get("https://fakestoreapi.com/products?limit=5")
+      .then((res) => {
+        setLimitProduct(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  };
+  useEffect(() => {
+    getLimitProduct();
+  },[]);
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-5 m-5'>
-        {limitProduct.map((product,index) => {
+    <div>
+      {loading && <Loading />}
+      { !loading && 
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-5 m-5">
+          {limitProduct.map((product, index) => {
             return (
-           <ProductCard 
-            product={product}
-            key={index}
-           />
+              <ProductCard product={product} key={index} />
               /* <div>
               <div key={product} className=' shadow-xl relative h-3/4'
               onMouseEnter={() => setHover(index)}
@@ -49,8 +56,10 @@ export default function LimitedProducts() {
             </div>
           
             </div> */
-            )
-        })}
+            );
+          })}
+        </div>
+      }
     </div>
-  )
+  );
 }

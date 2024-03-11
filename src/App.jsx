@@ -8,27 +8,17 @@ import Contact from './Pages/Contact';
 import SignUp from './Pages/SignUp';
 import axios from 'axios';
 import SingleProduct from './Pages/SingleProduct';
+import { useState } from 'react';
 
 function App() {
-  
-  // fetch('https://fakestoreapi.com/products/categories')
-  // .then((res) => res.json())
-  // .then((data) => console.log(data))
+  const [loading, setLoading] = useState(false);
 
-  // axios.get(`https://fakestoreapi.com/products/categories`)
-  // .then((res => console.log(res.json())))
-  // .catch((err) => {
-  //      console.log(err)
-
-  // })
-  // fetch('https://fakestoreapi.com/products?limit=5')
-  //           .then(res=>res.json())
-  //           .then(json=>console.log(json))
  
   return (
     <AppContext.Provider
      value={{ 
-
+       loading,
+       setLoading
       }}>
       <Router>
       <NavBar />
