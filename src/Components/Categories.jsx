@@ -46,7 +46,7 @@ export default function Categories() {
           return (
             <div
               key={index}
-              className="bg-white border border-slate-300 w-4/6 h- items-center justify-center text-center p-3 hover:bg-primary"
+              className="bg-white border border-slate-300 w-4/6 h- items-center justify-center text-center p-3 hover:bg-primary hover:scale-90 shadow-md duration-300 m-auto"
             >
               <img
                 src={imgCategories[category]}

@@ -10,6 +10,8 @@ import TextHeader from "../Components/textHeader";
 import OurProduct from "../Components/OurProduct";
 import Featured from "../Components/Featured";
 import Delivery from "../assets/icon-delivery.svg";
+import IconCustomer from "../assets/Icon-Customer.svg";
+import IconSecure from "../assets/Icon-secure.svg";
 import ps5 from "../assets/ps5.svg";
 import womanWear from "../assets/woman-wear.svg";
 import Speaker from "../assets/Speaker.svg";
@@ -30,8 +32,7 @@ export default function () {
       >
         <div className="p-10 pl-20 flex flex-col my-auto">
           <h1 className="pt-4 text-4xl ">Latest trending</h1>
-          <h2 className="font-bold pt-3  text-7xl ">Electronic items</h2>
-
+          <h2 className="font-bold pt-3 text-2xl md:text-7xl ">Electronic items</h2>
           <Button text="Learn more" className="text-primary bg-white " />
         </div>
       </div>
@@ -52,7 +53,7 @@ export default function () {
       <div>
         <Tabs text="Our Featured" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 content-center mx-auto place-content-center gap-3 text-white ">
+        <div className="grid grid-cols-1 md:grid-cols-2 content-center mx-auto my-8 place-content-center gap-3 text-white ">
           <TextOnImg
             img={ps5}
             text="Black and White version of the PS5 coming out on sale."
@@ -78,42 +79,23 @@ export default function () {
               header="Perfume"
               className='h-[45vh]'
             />
-              {/* <div className="bg-black relative">
-                <img
-                  src={Speaker}
-                  alt="Woman Wear"
-                  className="w-4/6 flex justify-center mx-auto  "
-                />
-                <div className="absolute bottom-0 top- text">
-                  <h1>PlayStation 5</h1>
-                  <p>Black and White version of the PS5 coming out on sale.</p>
-                  <Link to="">Shop now</Link>
-                </div>
-              </div> */}
-              {/* <div className="bg-black">
-                <img
-                  src={perfume}
-                  alt="Woman Wear"
-                  className="w-4/6 flex justify-center mx-auto"
-                />
-              </div> */}
             </div>
           </div>
         </div>
 
-        <div className="flex justify-around">
+        <div className="flex md:flex-row flex-col justify-around my-12">
           <Featured
             img={Delivery}
             header="FREE AND FAST DELIVERY"
             text="Free delivery for all orders over $140"
           />
           <Featured
-            img={Delivery}
+            img={IconCustomer}
             header="FREE AND FAST DELIVERY"
             text="Free delivery for all orders over $140"
           />
           <Featured
-            img={Delivery}
+            img={IconSecure}
             header="FREE AND FAST DELIVERY"
             text="Free delivery for all orders over $140"
           />
