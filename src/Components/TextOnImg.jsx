@@ -20,14 +20,14 @@ export default function TextOnImg({
     //     <Link to="">Shop now</Link>
     //   </div>
     // </div>
-    <div className="bg-black relative">
+    <div className="bg-black relative hover:scale-95 duration-300">
       <img
         src={img}
-        className="w-4/6 flex justify-center mx-auto  "
+        className="md:w-4/6 w-5/6 flex justify-center mx-auto  "
       />
       <div className="absolute bottom-5 left-5 w-3/5 text">
         <h1 className="text-xl">{header}</h1>
-        <p className="py-1">{text}</p>
+        <p className="py-1 text-xs">{text}</p>
         <Link to="" className="border-b-2">Shop now</Link>
       </div>
     </div>

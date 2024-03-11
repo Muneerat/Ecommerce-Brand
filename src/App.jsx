@@ -9,6 +9,7 @@ import SignUp from './Pages/SignUp';
 import axios from 'axios';
 import SingleProduct from './Pages/SingleProduct';
 import { useState } from 'react';
+import Footer from './Components/Footer';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path=':id' element={<SingleProduct/>} />
        </Routes>
+       <Footer />
       </Router>
     
     </AppContext.Provider>
