@@ -1,8 +1,11 @@
 import Button from "./Button";
 import { HiEye } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../Contexts/AppContent";
+
+const {addToCart} = useContext(AppContext); 
 
 export default function ProductCard({ product }) {
   const [isHover, setHover] = useState(null);
@@ -26,7 +29,10 @@ export default function ProductCard({ product }) {
             />
           </div>
           {isHover == product.id && (
-            <button className="absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white">
+            <button 
+               className="absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white"
+               onClick={() => addToCart(product)}
+                >
               Add to cart
             </button>
           )}
@@ -39,3 +45,5 @@ export default function ProductCard({ product }) {
     </div>
   );
 }
+
+

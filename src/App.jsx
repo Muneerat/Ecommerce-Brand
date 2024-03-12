@@ -12,14 +12,30 @@ import { useState } from 'react';
 import Footer from './Components/Footer';
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+ const [cart, setCart] = useState([]);
 
+ const addToCart = (product) => {
+   let existingProduct = cart.find((product)  => product.id === product.id);
+
+   if(existingProduct) {
+    let index = cart.findIndex((product) => product.id === product.id);
+    let newCart = [...cart];
+
+    newCart[index].qty = existingProduct.qty + 1;
+    setCart(newCart);
+   } else {
+     product.qty = 1;
+     setCart((prev) => [...prev, product])
+   }
+ }
  
   return (
     <AppContext.Provider
      value={{ 
-       loading,
-       setLoading
+       cart,
+       setCart,
+       addToCart: addToCart,
       }}>
       <Router>
       <NavBar />
