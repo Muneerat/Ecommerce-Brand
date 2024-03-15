@@ -5,12 +5,13 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import Layouts from "./Layouts";
 
 const currentYear = new Date().getFullYear();
 
 export default function Footer() {
   return (
-    <>
+    <Layouts className="bg-white">
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-4 gap-x-2.5 p-8  ">
         <div>
           <img src={Logo} alt="Logo" />
@@ -78,6 +79,6 @@ export default function Footer() {
       <div className="bg-primary-light p-2 text-center ">
         <p>© {currentYear} Ecommerce. All right reserved. Design by munie.</p>
       </div>
-    </>
+    </Layouts>
   );
 }

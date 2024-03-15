@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Logo from '../assets/logo.png';
-import FormInput from '../Components/Form/FormInput';
+import FormSearch from '../Components/Form/FormSearch';
 import { Link } from 'react-router-dom';
 import { IoSearch } from "react-icons/io5";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
@@ -44,7 +44,7 @@ export default function NavBar() {
     </div>
     <div className='flex items-center order-3'>
       <form className=' items-center hidden md:flex '>
-      <FormInput 
+      <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}
@@ -56,7 +56,7 @@ export default function NavBar() {
     </div>
     </div>
     <form className='items-center flex md:hidden w-full '>
-      <FormInput 
+      <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}

@@ -1,16 +1,16 @@
-export default function FormInput({
+export default function FormSearch({
     setData,
     className= '',
     type='text',
-    afterContent='',
+    afterContent='null',
     ...props
 }) {
     return (
-        <div className="flex group group-hover:outline-1 border-b-2 border-slate-500 py-1 rounded-md shadow-sm relative bg- w-full m">
+        <div className="flex group group-hover:outline-1 border-2 border-primary-dark py-1 rounded-md shadow-sm relative bg-primary-light w-full">
         <input
             type={type}
             className={`form-input py-1 px-4 outline-none border-none w-full block bg-inherit pl-5 pr-6 ${className}`}
-            // onChange={(e) => setData(e.target.value)}
+            onChange={(e) => setData(e.target.value)}
             {...props}
         />
         <button 
