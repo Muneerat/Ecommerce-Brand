@@ -18,8 +18,47 @@ import Speaker from "../assets/Speaker.svg";
 import perfume from "../assets/perfume.svg";
 import { Link } from "react-router-dom";
 import TextOnImg from "../Components/TextOnImg";
+import { useRef } from "react";
+import { useEffect } from "react";
+import Typed from "typed.js";
 
 export default function () {
+   // Create reference to store the DOM element containing the animation
+   const el = useRef(null);
+
+   useEffect(() => {
+     const typed = new Typed(el.current, {
+       strings: ['Electronic items', ],
+       typeSpeed: 150,
+       backSpeed: 150,
+       loop: true,
+       showCursor: false,
+       startDelay: 300,
+       backDelay: 300,
+       smartBackspace: true,
+       shuffle: true,
+     });
+ 
+     return () => {
+       // Destroy Typed instance during cleanup to stop animation
+       typed.destroy();
+     };
+   }, []);
+ 
+  //  useEffect(() => {
+  //   const options = {
+  //     strings: ['Hello, World!', 'Welcome to my website!'],
+  //     typeSpeed: 50,
+  //     backSpeed: 50,
+  //     loop: true
+  //   };
+  
+  //   const typed = new Typed(typeRef.current, options);
+  
+  //   return () => {
+  //     typed.destroy();
+  //   };
+  // }, []);
   return (
     <Layouts>
       {/* <div className='h-1 w-full bg-slate-200'></div> */}
@@ -32,8 +71,9 @@ export default function () {
       >
         <div className="p-10 pl-20 flex flex-col my-auto">
           <h1 className="pt-4 text-4xl ">Latest trending</h1>
-          <h2 className="font-bold pt-3 text-2xl md:text-7xl ">Electronic items</h2>
-          <Button text="Learn more" className="text-primary bg-white " />
+          <h2 className="font-bold pt-3 text-2xl md:text-7xl " ref={el}></h2>
+          
+          <Button text="Learn more" className="text-primary bg-white hover:text-white" />
         </div>
       </div>
       <div className="mt-5">
