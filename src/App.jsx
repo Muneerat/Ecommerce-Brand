@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+//import { useState, useContext } from 'react';
 import { BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom';
 import { AppContext } from './Contexts/AppContent';
 import NavBar from './Components/NavBar';
@@ -10,12 +10,18 @@ import axios from 'axios';
 import SingleProduct from './Pages/SingleProduct';
 import { useEffect, useState } from 'react';
 import Footer from './Components/Footer';
-import SignUp from './Pages/SignUp_In/SignUp';
-import SignIn from './Pages/SignUp_In/SignIn'
+import SignUp from './Pages/Auth/SignUp';
+import SignIn from './Pages/Auth/SignIn';
+// import { ToastContainer, toast } from 'react-toastify';
+//   import 'react-toastify/dist/ReactToastify.css';
+ import toast, {Toaster} from "react-hot-toast";
+//import toast,{ ToastContainer } from 'react-toastify';
+// import {Toaster} from 'react-hot-toast';
 
 function App() {
   // const [loading, setLoading] = useState(false);
  const [cart, setCart] = useState([]);
+ const [notice, setNotice] = useState({});
 
 //  console.log(cart);
 //Get the items from the cart
@@ -80,7 +86,33 @@ function App() {
  }
  useEffect(() => {
    getCart();
- },[])
+   if(notice.message){
+        if(notice.type == 'success'){
+          toast.success(notice.message, {
+            position: 'top-right'
+          });
+        }
+        else{
+          toast.error(notice.message, {
+            position: 'top-right'
+          });
+        }
+      }
+ },[notice])
+//  useEffect(() => {
+//   if(notice.message){
+//     if(notice.type === 'success'){
+//       toast.success(notice.message, {
+//         position: 'top-right'
+//       });
+//     }
+//     else{
+//       toast.error(notice.message, {
+//         position: 'top-right'
+//       });
+//     }
+//   }
+// },[notice])
  
   return (
     <AppContext.Provider
@@ -88,8 +120,11 @@ function App() {
        cart,
        setCart,
        addToCart: addToCart,
+       setNotice
       }}>
-      
+      {/* <Toaster/> */}
+      {/* <ToastContainer />  */}
+       <Toaster />  
       <Router>
       <NavBar />
        <Routes>
