@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FormInput from "../../Components/Form/FormInput";
 import sign from "../../assets/sign.png";
 import Button from "../../Components/Button";
@@ -7,7 +7,8 @@ import Links from "../../Components/Links";
 import FormLabel from "../../Components/Form/FormLabel";
 import Layouts from "../../Components/Layouts";
 import axios from "axios";
-
+import { AppContext } from "../../Contexts/AppContent";
+import FormError from "../../Components/Form/FormError";
 export default function SignUp() {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -15,23 +16,22 @@ export default function SignUp() {
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
   const [username, SetUsername] = useState("");
+  const [errors, SetErrors] = useState({});
+  const { setNotice } = useContext(AppContext);
 
   const submit = (e) => {
     e.preventDefault();
+    SetErrors({});
     setSubmitting(true);
     //Create user
     axios
       .post("https://fakestoreapi.com/users", {
-        // name: e.target.name.value,
-        // email: e.target.email.value,
-        // password: e.target.password.value,
-
         email: email,
         username: username,
         password: password,
         name: {
-          firstname: name.split("")[0],
-          lastname: name.split("")[1],
+          firstname: name.split(" ")[0],
+          lastname: name.split(" ")[1],
         },
         address: {
           city: "kilcoole",
@@ -48,9 +48,15 @@ export default function SignUp() {
       .then((res) => {
         console.log(res.config.data);
         localStorage.setItem("user", JSON.stringify(res.config.data));
-        SetName("");
-        // setSubmitting(false);
-        //navigate("/signIn");
+        // SetName("");
+        // SetEmail("");
+        // SetPassword("");
+        // SetUsername("");
+        setNotice({
+          type: 'success',
+          message: 'Your account has been successfully created.'
+      });
+        navigate("/signup");
       })
       .catch((err) => {
         console.log(err);
@@ -75,9 +81,11 @@ export default function SignUp() {
                 placeholder="Name"
                 name="name"
                 id="name"
+                required
                 value={name}
                 onChange={(e) => SetName(e.target.value)}
               />
+              <FormError error={errors?.name} />
             </div>
             <div className="max-w-xs mx-auto my-3">
               <FormLabel>Enter your username</FormLabel>
@@ -85,6 +93,7 @@ export default function SignUp() {
                 placeholder="Username"
                 name="username"
                 id="username"
+                required
                 value={username}
                 onChange={(e) => SetUsername(e.target.value)}
               />
@@ -95,6 +104,7 @@ export default function SignUp() {
                 placeholder="Email or Phone Number"
                 name="email"
                 id="email"
+                required
                 value={email}
                 onChange={(e) => SetEmail(e.target.value)}
               />
@@ -106,6 +116,7 @@ export default function SignUp() {
                 placeholder="********"
                 name="password"
                 id="password"
+                required
                 value={password}
                 onChange={(e) => SetPassword(e.target.value)}
               />
