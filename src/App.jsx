@@ -12,10 +12,8 @@ import { useEffect, useState } from "react";
 import Footer from "./Components/Footer";
 import SignUp from "./Pages/Auth/SignUp";
 import SignIn from "./Pages/Auth/SignIn";
-// import { ToastContainer, toast } from 'react-toastify';
-//   import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from "react-hot-toast";
-import AllProduct from "./Components/AllProduct";
+import AllProduct from "./Pages/AllProduct";
 //import toast,{ ToastContainer } from 'react-toastify';
 // import {Toaster} from 'react-hot-toast';
 
@@ -27,6 +25,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -65,6 +64,24 @@ function App() {
   };
   useEffect(() => {
     getOurProducts();
+  }, []);
+
+  //Get categories
+  const getCategory = () => {
+   
+    axios
+      .get(`https://fakestoreapi.com/products/categories`)
+      .then((res) => {
+        // console.log(res.data)
+        setCategories(res.data);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getCategory();
   }, []);
   //  console.log(cart);
   //Get the items from the cart
@@ -176,6 +193,9 @@ function App() {
           ourProducts,
           setOurProducts,
           getOurProducts,
+          getCategory,
+          categories,
+          setCategories
         }}
       >
         {/* <Toaster/> */}

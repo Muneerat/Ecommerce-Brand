@@ -29,7 +29,7 @@ export default function NavBar() {
         <Links to='/' text='Home'/>
       </li>
       <li>
-      <Links to='/contact' text='Contact'/>
+      <Links to='/allProducts' text='Products'/>
       </li>
       <li>
       <Links to='/about' text='About'/>

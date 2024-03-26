@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GiClothes } from "react-icons/gi";
 import { AiFillAlipayCircle } from "react-icons/ai";
 import electronics from "../assets/electronics.png";
@@ -8,9 +8,10 @@ import jewelery from "../assets/Jewelery.png";
 import Men from "../assets/men.png";
 import Women from "../assets/Women.png";
 import TextHeader from "./textHeader";
+import { AppContext } from "../Contexts/AppContent";
 
 export default function Categories() {
-  const [categories, setCategories] = useState([]);
+  const {categories} = useContext(AppContext);
 
   const imgCategories = {
     electronics: electronics,
@@ -18,25 +19,6 @@ export default function Categories() {
     "women's clothing": Women,
     "men's clothing": Men,
   };
-  // {'img1','logo']
-  // 'img1' : Img
-
-  const getCategory = () => {
-    axios
-      .get(`https://fakestoreapi.com/products/categories`)
-      .then((res) => {
-        // console.log(res.data)
-        setCategories(res.data);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    getCategory();
-  }, []);
 
   return (
     <div>
