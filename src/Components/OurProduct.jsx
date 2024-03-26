@@ -5,31 +5,33 @@ import ProductCard from './ProductCard';
 import Button from './Button';
 import Loading from './Loading';
 import { AppContext } from '../Contexts/AppContent';
+import { Link } from 'react-router-dom';
 
 export default function OurProduct() {
-    const [ourProducts, setOurProducts] = useState([]);
+    // const [ourProducts, setOurProducts] = useState([]);
     const [showAllProducts, setShowAllProducts] = useState(false);
     const [loading, setLoading] = useState(false);
+    const {ourProducts,setOurProducts,getOurProducts} = useContext(AppContext)
     // const {loading, setLoading} = useContext(AppContext);
 
-    const getOurProducts = () => {
-        setLoading(true);
-        axios.get('https://fakestoreapi.com/products')
-        .then((res) => {
-            setOurProducts(res.data);
+    // const getOurProducts = () => {
+    //     setLoading(true);
+    //     axios.get('https://fakestoreapi.com/products')
+    //     .then((res) => {
+    //         setOurProducts(res.data);
 
-        })
-        .catch((error) => {
-            console.error(error);
-        })
-        .finally(() => {
-             setLoading(false);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     })
+    //     .finally(() => {
+    //          setLoading(false);
  
-        })
-    }
-    useEffect(() => {
-        getOurProducts();
-    }, [])
+    //     })
+    // }
+    // useEffect(() => {
+    //     getOurProducts();
+    // }, [])
 
     const handleViewAllProducts = () => {
         setShowAllProducts(!showAllProducts);
@@ -54,10 +56,14 @@ export default function OurProduct() {
      </div>}
      {!showAllProducts && (
         <div className='flex justify-center w-full mx-auto'>
+       <Link to='/allProducts'>
         <Button 
                onClick={handleViewAllProducts}
                text='View All Products'
-               className='p-3 transition-all duration-300 bg-primary text-white rounded-sm hover:bg-primary-light hover:text-primary ' />
+               className='p-3 transition-all duration-300 bg-primary text-white rounded-sm hover:bg-primary-light hover:text-primary '
+         />
+      </Link>
+       
     </div> 
         
      )}

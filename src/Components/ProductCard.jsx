@@ -21,7 +21,7 @@ export default function ProductCard({ product }) {
         >
           <div className="right-4 absolute text-primary ">
             <FaRegHeart className="my-3 hover:text-black" />
-            <HiEye className="my-3 hover:text-black " />
+            {/* <HiEye className="my-3 hover:text-black " /> */}
           </div>
           <div className="flex justify-center pt-5">
             <img
@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
           </div>
           {isHover == product.id && (
             <button 
-               className="absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white"
+               className="absolute bottom-0 p-1 transition-all duration-300 bg-primary w-full text-white"
                onClick={() => addToCart(product)}
                 >
               Add to cart

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FormInput from "../../Components/Form/FormInput";
 import sign from "../../assets/sign.png";
 import Button from "../../Components/Button";
@@ -17,11 +17,35 @@ export default function SignUp() {
   const [password, SetPassword] = useState("");
   const [username, SetUsername] = useState("");
   const [errors, SetErrors] = useState({});
-  const { setNotice } = useContext(AppContext);
-
+   const { setNotice } = useContext(AppContext);
+  
+  //Validation for yje inputs
+   const validate = () => {
+    const errors = {};
+if (!name && !name.trim()) {
+      errors.name = "Name is required";
+    }
+    if (!email) {
+      errors.email = "Email is required";
+    }
+    if (!password) {
+      errors.password = "Password is required";
+    }
+    if (!username) {
+      errors.username = "Username is required";
+    }
+    SetErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
   const submit = (e) => {
     e.preventDefault();
-    SetErrors({});
+   
+   const isValid =  validate();
+    if( !isValid ){
+      return;
+    }
+    
+     SetErrors({});
     setSubmitting(true);
     //Create user
     axios
@@ -48,15 +72,15 @@ export default function SignUp() {
       .then((res) => {
         console.log(res.config.data);
         localStorage.setItem("user", JSON.stringify(res.config.data));
-        // SetName("");
-        // SetEmail("");
-        // SetPassword("");
-        // SetUsername("");
+        SetName("");
+        SetEmail("");
+        SetPassword("");
+        SetUsername("");
         setNotice({
           type: 'success',
           message: 'Your account has been successfully created.'
       });
-        navigate("/signup");
+        navigate("/signin");
       })
       .catch((err) => {
         console.log(err);
@@ -65,6 +89,9 @@ export default function SignUp() {
         setSubmitting(false);
       });
   };
+  // useEffect (() => {
+   
+  // })
   return (
     <Layouts className="p-0">
       <div className="flex w-full p-0">
@@ -97,6 +124,7 @@ export default function SignUp() {
                 value={username}
                 onChange={(e) => SetUsername(e.target.value)}
               />
+               <FormError error={errors?.username} />
             </div>
             <div className="max-w-xs mx-auto my-3">
               <FormLabel>Enter your Email</FormLabel>
@@ -105,9 +133,11 @@ export default function SignUp() {
                 name="email"
                 id="email"
                 required
+                type="email"
                 value={email}
                 onChange={(e) => SetEmail(e.target.value)}
               />
+               <FormError error={errors?.email} />
             </div>
             <div className="max-w-xs mx-auto my-3">
               <FormLabel>Enter your Password</FormLabel>
@@ -120,6 +150,7 @@ export default function SignUp() {
                 value={password}
                 onChange={(e) => SetPassword(e.target.value)}
               />
+               <FormError error={errors?.password} />
             </div>
             <Button
               className="bg-primary w-full text-white my-4 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-light hover:text-black"
@@ -131,7 +162,7 @@ export default function SignUp() {
               {!submitting && <span>Create Account</span>}
             </Button>
             <p>
-              Already have account? <Link to="/signIn">Log in</Link>
+              Already have account? <Link lassName=" text-primary" to="/signIn">Login</Link>
             </p>
           </form>
         </div>

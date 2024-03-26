@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Logo from '../assets/logo.png';
 import FormSearch from '../Components/Form/FormSearch';
 import { Link } from 'react-router-dom';
@@ -8,12 +8,14 @@ import { GrCart } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiX } from "react-icons/hi";
 import Links from './Links';
+import { AppContext } from '../Contexts/AppContent';
 
 export default function NavBar() {
     const [openMenu , setOpenMenu] = useState(true)
+    const {darkMode, toggleTheme} = useContext(AppContext)
   return (
    
-    <div className='w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'>
+    <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200' : 'w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
     <div className="flex justify-between p-6">
     <div className="order-2 md:order-none">
     <Link to="/" >
@@ -27,7 +29,7 @@ export default function NavBar() {
         <Links to='/' text='Home'/>
       </li>
       <li>
-      <Links to='/contact' text='Contact'/>
+      <Links to='/allProducts' text='Products'/>
       </li>
       <li>
       <Links to='/about' text='About'/>
@@ -35,11 +37,16 @@ export default function NavBar() {
       <li>
       <Links to='/signup' text='SignUp'/>
       </li>
+      
         </ul> 
      <button className='flex md:hidden' onClick={ () => setOpenMenu(!openMenu)}>
     { openMenu ?  <GiHamburgerMenu size={30} /> :  <HiX size={30} /> }
        {/* <GiHamburgerMenu size={30} />  */}
        {/* <HiX /> */}
+     </button>
+     <button onClick={toggleTheme}
+     >
+      {darkMode ? "darkMode" : "lightmode"}
      </button>
     </div>
     <div className='flex items-center order-3'>
