@@ -29,7 +29,7 @@ function App() {
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
-
+//Validation
   const validate = () => {
     const errors = {};
     if (!name) {
@@ -84,6 +84,7 @@ function App() {
     getCategory();
   }, []);
   //  console.log(cart);
+
   //Get the items from the cart
   const getCart = async () => {
     try {
@@ -104,7 +105,7 @@ function App() {
   const addToCart = async (product) => {
     let existingCart = cart ?? [];
     let productExist = existingCart.find((prod) => (prod.id = product.id));
-    // console.log(productExist)
+     console.log(productExist)
 
     if (productExist) {
       productExist.quantity += 1;
@@ -120,13 +121,13 @@ function App() {
       // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
       let response = await axios.post("https://fakestoreapi.com/carts", {
         userid: "5",
-        date: new Date().getDate(),
-        products: existingCart,
-        // title: title,
-        // price: price,
-        // description: description,
-        // image: image,
-        // category: category,
+        // date: new Date().getDate(),
+        // products: existingCart,
+        title: title,
+        price: price,
+        description: description,
+        image: image,
+        category: category,
 
       });
       console.log(response.data);
