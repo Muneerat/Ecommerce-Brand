@@ -42,7 +42,10 @@ export default function Footer() {
             <Link to="" className="py-1">
               About
             </Link>
-            <Link to="" className="py-1">
+            <Link to="/allProducts" className="py-1">
+              Product
+            </Link>
+            <Link to="/signup" className="py-1">
               Contact
             </Link>
           </div>

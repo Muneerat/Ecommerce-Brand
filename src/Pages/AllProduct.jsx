@@ -37,7 +37,7 @@ export default function AllProduct() {
   }
   return (
     <div className="flex max-wl">
-      <div className=" shadow-md w-6/12 m-3 p-3">
+      <div className=" shadow-md w-2/12 m-3 p-3">
         <div className="flex my-3">
           <IoFilterOutline size={22} className="p-1 " />
           <p>Filter</p>
@@ -74,21 +74,21 @@ export default function AllProduct() {
             <option>Ascending</option>
           </select>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5 m-5">
-        {/* {ourProducts.map((ourProduct, index) => {
+      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5 m-5 w-11/12">
+        {ourProducts.map((ourProduct, index) => {
           return <ProductCard product={ourProduct} key={index} />;
-        })} */}
-        { filters && 
+        })}
+        {/* { filters && 
         <>
         {ourProducts
         .filter((ourProduct) => {
-         return ourProduct.category === '' || ourProduct.category === selectedCategory;
+         return selectedCategory === '' || ourProduct.category === selectedCategory;
          })
         .map((ourProduct, index) => {
           return <ProductCard product={ourProduct} key={index} />;
         })}
         </>
-        }
+        } */}
         {/* {sortsItem.map((sortsItems, index) => {
           return <ProductCard product={sortsItems} key={index} />;
         })} */}
