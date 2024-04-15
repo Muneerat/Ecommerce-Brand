@@ -102,54 +102,79 @@ function App() {
   // if it doesn\t, add product
   // submit new to api
   // if it doesn't exist add product to cart and if it exist increment qty to current quantity number
-  const addToCart = async (product) => {
-    let existingCart = cart ?? [];
-    let productExist = existingCart.find((prod) => (prod.id = product.id));
-     console.log(productExist)
+ 
+  // const addToCart = async (product) => {
+  //   let existingCart = cart ?? [];
+  //   let productExist = existingCart.find((prod) => (prod.id = product.id));
+  //    console.log(productExist)
 
-    if (productExist) {
-      productExist.quantity += 1;
-      let index = existingCart.findIndex((prod) => prod.id === product.id);
-      existingCart[index] = productExist;
-    } else {
-      existingCart.push({
-        productid: product.id,
-        quantity: 1,
-      });
+  //   if (productExist) {
+  //     productExist.quantity += 1;
+  //     let index = existingCart.findIndex((prod) => prod.id === product.id);
+  //     existingCart[index] = productExist;
+  //   } else {
+  //     existingCart.push({
+  //       productid: product.id,
+  //       quantity: 1,
+  //     });
+  //   }
+  //   try {
+  //     // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
+  //     let response = await axios.post("https://fakestoreapi.com/carts", {
+  //       userid: "5",
+  //       // date: new Date().getDate(),
+  //       // products: existingCart,
+  //       title: title,
+  //       price: price,
+  //       description: description,
+  //       image: image,
+  //       category: category,
+
+  //     });
+  //     console.log(response.data);
+  //     setCart(response.data);
+  //     getCart();
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   }
+
+  //   //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
+  //   //  console.log("GOT HERE")
+  //   //  if(existingProduct) {
+  //   //   let index = cart.findIndex((productID) => productID.id === productID.id);
+  //   //   let newCart = [...cart];
+
+  //   //   newCart[index].qty = existingProduct.qty + 1;
+  //   //   setCart(newCart);
+  //   //  } else {
+  //   //    product.qty = 1;
+  //   //    setCart((prev) => [...prev, product])
+  //   //  }
+  // };
+  const addToCart = (product,id) => {
+   
+    //add to cart
+    const newItem = {...product,amount:1};
+    //Check if the product is already in cart
+    const cartItem = cart.find((item) => {
+      return item.id === id;
+    });
+    console.log(newItem)
+    //if cart item is already in cart
+    if (cartItem) {
+      //increase the quantity
+      const newCart = [...cart].map(item => {
+        if(item.id === id) {
+          return {...item, amount: cartItem.amount + 1}
+        } else {
+          return item;
+        }
+      })
+      setCart(newCart);
     }
-    try {
-      // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
-      let response = await axios.post("https://fakestoreapi.com/carts", {
-        userid: "5",
-        // date: new Date().getDate(),
-        // products: existingCart,
-        title: title,
-        price: price,
-        description: description,
-        image: image,
-        category: category,
-
-      });
-      console.log(response.data);
-      setCart(response.data);
-      getCart();
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-
-    //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
-    //  console.log("GOT HERE")
-    //  if(existingProduct) {
-    //   let index = cart.findIndex((productID) => productID.id === productID.id);
-    //   let newCart = [...cart];
-
-    //   newCart[index].qty = existingProduct.qty + 1;
-    //   setCart(newCart);
-    //  } else {
-    //    product.qty = 1;
-    //    setCart((prev) => [...prev, product])
-    //  }
-  };
+      //add the product to cart
+    
+  }
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -196,7 +221,7 @@ function App() {
           getOurProducts,
           getCategory,
           categories,
-          setCategories
+          setCategories,
         }}
       >
         {/* <Toaster/> */}

@@ -10,9 +10,11 @@ import { HiX } from "react-icons/hi";
 import Links from './Links';
 import { AppContext } from '../Contexts/AppContent';
 
-export default function NavBar() {
+export default function NavBar({item}) {
+   
     const [openMenu , setOpenMenu] = useState(true)
     const {darkMode, toggleTheme} = useContext(AppContext)
+    const {cart} = useContext(AppContext)
   return (
    
     <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200' : 'w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
@@ -58,8 +60,16 @@ export default function NavBar() {
        afterContent={<IoSearch />}
        />
       </form>
-      <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span>   
+      <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
+      <div>
+      {cart.map((item) => {
+        return (
+          <span>{item.length}10</span>
+        )
+      })}
+     
       <GrCart size={25}  />
+      </div>  
     </div>
     </div>
     <form className='items-center flex md:hidden w-full '>
