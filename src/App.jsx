@@ -14,6 +14,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import SignIn from "./Pages/Auth/SignIn";
 import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
+import Cart from "./Components/cart";
 //import toast,{ ToastContainer } from 'react-toastify';
 // import {Toaster} from 'react-hot-toast';
 
@@ -166,12 +167,17 @@ function App() {
       const newCart = [...cart].map(item => {
         if(item.id === id) {
           return {...item, amount: cartItem.amount + 1}
+         
         } else {
           return item;
         }
       })
       setCart(newCart);
+      console.log(newCart)
+    }else{
+      setCart([...cart, newItem])
     }
+    console.log(cartItem)
       //add the product to cart
     
   }
@@ -189,20 +195,6 @@ function App() {
       }
     }
   }, [notice]);
-  //  useEffect(() => {
-  //   if(notice.message){
-  //     if(notice.type === 'success'){
-  //       toast.success(notice.message, {
-  //         position: 'top-right'
-  //       });
-  //     }
-  //     else{
-  //       toast.error(notice.message, {
-  //         position: 'top-right'
-  //       });
-  //     }
-  //   }
-  // },[notice])
 
   return (
     <div className={darkMode ? "app dark" : "dark"}>
@@ -237,6 +229,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path=":id" element={<SingleProduct />} />
             <Route path="/allProducts" element={<AllProduct />} />
+            <Route path="/cart" element={<Cart />}/>
           </Routes>
           <Footer />
         </Router>

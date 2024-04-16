@@ -62,13 +62,11 @@ export default function NavBar({item}) {
       </form>
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
-      {cart.map((item) => {
-        return (
-          <span>{item.length}10</span>
-        )
-      })}
-     
+      <Link to="/cart" >
+      <span>{cart.length}</span>
       <GrCart size={25}  />
+      </Link>
+     
       </div>  
     </div>
     </div>
