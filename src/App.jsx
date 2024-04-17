@@ -15,8 +15,6 @@ import SignIn from "./Pages/Auth/SignIn";
 import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
 import Cart from "./Components/cart";
-//import toast,{ ToastContainer } from 'react-toastify';
-// import {Toaster} from 'react-hot-toast';
 
 function App() {
   // const [loading, setLoading] = useState(false);
@@ -27,6 +25,7 @@ function App() {
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -84,12 +83,11 @@ function App() {
   useEffect(() => {
     getCategory();
   }, []);
-  //  console.log(cart);
 
   //Get the items from the cart
   const getCart = async () => {
     try {
-      const response = await axios.get(`https://fakestoreapi.com/carts/3`);
+      const response = await axios.get(`https://fakestoreapi.com/carts/${id})`);
       console.log(response.data);
       setCart(response.data.products);
       // console.log(response.data.product);
@@ -152,6 +150,7 @@ function App() {
   //   //    setCart((prev) => [...prev, product])
   //   //  }
   // };
+
   const addToCart = (product,id) => {
    
     //add to cart
@@ -180,6 +179,11 @@ function App() {
     console.log(cartItem)
       //add the product to cart
     
+  }
+  //Remove the item from cart
+  const removeItem = (product) => {
+    let updatedCart = cart.filter((prod) => prod.id !== product.id );
+    setCart(updatedCart)
   }
   useEffect(() => {
     getCart();
@@ -214,6 +218,7 @@ function App() {
           getCategory,
           categories,
           setCategories,
+          removeItem
         }}
       >
         {/* <Toaster/> */}
