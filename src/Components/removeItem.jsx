@@ -5,7 +5,7 @@ export default function RemoveItem({product}) {
     const {removeItem} = useContext(AppContext);
   return (
     <div>
-        <button onClick={() => removeItem(product)}>Remove Item</button>
+        <button onClick={() => removeItem(product)}>Remove </button>
     </div>
   )
 }
