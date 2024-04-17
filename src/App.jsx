@@ -14,8 +14,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import SignIn from "./Pages/Auth/SignIn";
 import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
-//import toast,{ ToastContainer } from 'react-toastify';
-// import {Toaster} from 'react-hot-toast';
+import Cart from "./Components/cart";
 
 function App() {
   // const [loading, setLoading] = useState(false);
@@ -26,6 +25,7 @@ function App() {
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -83,12 +83,11 @@ function App() {
   useEffect(() => {
     getCategory();
   }, []);
-  //  console.log(cart);
 
   //Get the items from the cart
   const getCart = async () => {
     try {
-      const response = await axios.get(`https://fakestoreapi.com/carts/3`);
+      const response = await axios.get(`https://fakestoreapi.com/carts/${id})`);
       console.log(response.data);
       setCart(response.data.products);
       // console.log(response.data.product);
@@ -102,54 +101,89 @@ function App() {
   // if it doesn\t, add product
   // submit new to api
   // if it doesn't exist add product to cart and if it exist increment qty to current quantity number
-  const addToCart = async (product) => {
-    let existingCart = cart ?? [];
-    let productExist = existingCart.find((prod) => (prod.id = product.id));
-     console.log(productExist)
+ 
+  // const addToCart = async (product) => {
+  //   let existingCart = cart ?? [];
+  //   let productExist = existingCart.find((prod) => (prod.id = product.id));
+  //    console.log(productExist)
 
-    if (productExist) {
-      productExist.quantity += 1;
-      let index = existingCart.findIndex((prod) => prod.id === product.id);
-      existingCart[index] = productExist;
-    } else {
-      existingCart.push({
-        productid: product.id,
-        quantity: 1,
-      });
+  //   if (productExist) {
+  //     productExist.quantity += 1;
+  //     let index = existingCart.findIndex((prod) => prod.id === product.id);
+  //     existingCart[index] = productExist;
+  //   } else {
+  //     existingCart.push({
+  //       productid: product.id,
+  //       quantity: 1,
+  //     });
+  //   }
+  //   try {
+  //     // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
+  //     let response = await axios.post("https://fakestoreapi.com/carts", {
+  //       userid: "5",
+  //       // date: new Date().getDate(),
+  //       // products: existingCart,
+  //       title: title,
+  //       price: price,
+  //       description: description,
+  //       image: image,
+  //       category: category,
+
+  //     });
+  //     console.log(response.data);
+  //     setCart(response.data);
+  //     getCart();
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   }
+
+  //   //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
+  //   //  console.log("GOT HERE")
+  //   //  if(existingProduct) {
+  //   //   let index = cart.findIndex((productID) => productID.id === productID.id);
+  //   //   let newCart = [...cart];
+
+  //   //   newCart[index].qty = existingProduct.qty + 1;
+  //   //   setCart(newCart);
+  //   //  } else {
+  //   //    product.qty = 1;
+  //   //    setCart((prev) => [...prev, product])
+  //   //  }
+  // };
+
+  const addToCart = (product,id) => {
+   
+    //add to cart
+    const newItem = {...product,amount:1};
+    //Check if the product is already in cart
+    const cartItem = cart.find((item) => {
+      return item.id === id;
+    });
+    //if cart item is already in cart
+    if (cartItem) {
+      //increase the quantity
+      const newCart = [...cart].map(item => {
+        if(item.id === id) {
+          return {...item, amount: cartItem.amount + 1}
+         
+        } else {
+          return item;
+        }
+      })
+      setCart(newCart);
+      console.log(newCart)
+    }else{
+      setCart([...cart, newItem])
     }
-    try {
-      // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
-      let response = await axios.post("https://fakestoreapi.com/carts", {
-        userid: "5",
-        // date: new Date().getDate(),
-        // products: existingCart,
-        title: title,
-        price: price,
-        description: description,
-        image: image,
-        category: category,
-
-      });
-      console.log(response.data);
-      setCart(response.data);
-      getCart();
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-
-    //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
-    //  console.log("GOT HERE")
-    //  if(existingProduct) {
-    //   let index = cart.findIndex((productID) => productID.id === productID.id);
-    //   let newCart = [...cart];
-
-    //   newCart[index].qty = existingProduct.qty + 1;
-    //   setCart(newCart);
-    //  } else {
-    //    product.qty = 1;
-    //    setCart((prev) => [...prev, product])
-    //  }
-  };
+    console.log(cartItem)
+      //add the product to cart
+    
+  }
+  //Remove the item from cart
+  const removeItem = (product) => {
+    let updatedCart = cart.filter((prod) => prod.id !== product.id );
+    setCart(updatedCart)
+  }
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -164,20 +198,6 @@ function App() {
       }
     }
   }, [notice]);
-  //  useEffect(() => {
-  //   if(notice.message){
-  //     if(notice.type === 'success'){
-  //       toast.success(notice.message, {
-  //         position: 'top-right'
-  //       });
-  //     }
-  //     else{
-  //       toast.error(notice.message, {
-  //         position: 'top-right'
-  //       });
-  //     }
-  //   }
-  // },[notice])
 
   return (
     <div className={darkMode ? "app dark" : "dark"}>
@@ -196,7 +216,8 @@ function App() {
           getOurProducts,
           getCategory,
           categories,
-          setCategories
+          setCategories,
+          removeItem
         }}
       >
         {/* <Toaster/> */}
@@ -212,6 +233,7 @@ function App() {
             <Route path="/signIn" element={<SignIn />} />
             <Route path=":id" element={<SingleProduct />} />
             <Route path="/allProducts" element={<AllProduct />} />
+            <Route path="/cart" element={<Cart />}/>
           </Routes>
           <Footer />
         </Router>

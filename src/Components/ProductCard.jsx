@@ -9,6 +9,7 @@ import { AppContext } from "../Contexts/AppContent";
 
 export default function ProductCard({ product }) {
   const {addToCart} = useContext(AppContext); 
+  const { id, image, category, title, price } = product;
   const [isHover, setHover] = useState('');
   return (
     <div>
@@ -26,14 +27,14 @@ export default function ProductCard({ product }) {
           <div className="flex justify-center pt-5">
             <img
               className=" w-2/5 p-3 flex "
-              src={product.image}
-              alt={product.title}
+              src={image}
+              alt={title}
             />
           </div>
           {isHover == product.id && (
             <button 
                className="absolute bottom-0 p-1 transition-all duration-300 bg-primary w-full text-white"
-               onClick={() => addToCart(product)}
+               onClick={() => addToCart(product, id)}
                 >
               Add to cart
             </button>
