@@ -159,7 +159,6 @@ function App() {
     const cartItem = cart.find((item) => {
       return item.id === id;
     });
-    console.log(newItem)
     //if cart item is already in cart
     if (cartItem) {
       //increase the quantity
