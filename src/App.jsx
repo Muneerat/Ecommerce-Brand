@@ -25,6 +25,8 @@ function App() {
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [emptyCart, setEmptyCart] = useState(false);
+  const [totalItems, setTotalItems] = useState();
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -96,61 +98,7 @@ function App() {
     }
   };
 
-  // get existing cart
-  // check if product exists in cart and increase the qty
-  // if it doesn\t, add product
-  // submit new to api
-  // if it doesn't exist add product to cart and if it exist increment qty to current quantity number
- 
-  // const addToCart = async (product) => {
-  //   let existingCart = cart ?? [];
-  //   let productExist = existingCart.find((prod) => (prod.id = product.id));
-  //    console.log(productExist)
-
-  //   if (productExist) {
-  //     productExist.quantity += 1;
-  //     let index = existingCart.findIndex((prod) => prod.id === product.id);
-  //     existingCart[index] = productExist;
-  //   } else {
-  //     existingCart.push({
-  //       productid: product.id,
-  //       quantity: 1,
-  //     });
-  //   }
-  //   try {
-  //     // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
-  //     let response = await axios.post("https://fakestoreapi.com/carts", {
-  //       userid: "5",
-  //       // date: new Date().getDate(),
-  //       // products: existingCart,
-  //       title: title,
-  //       price: price,
-  //       description: description,
-  //       image: image,
-  //       category: category,
-
-  //     });
-  //     console.log(response.data);
-  //     setCart(response.data);
-  //     getCart();
-  //   } catch (error) {
-  //     console.error("Error adding to cart:", error);
-  //   }
-
-  //   //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
-  //   //  console.log("GOT HERE")
-  //   //  if(existingProduct) {
-  //   //   let index = cart.findIndex((productID) => productID.id === productID.id);
-  //   //   let newCart = [...cart];
-
-  //   //   newCart[index].qty = existingProduct.qty + 1;
-  //   //   setCart(newCart);
-  //   //  } else {
-  //   //    product.qty = 1;
-  //   //    setCart((prev) => [...prev, product])
-  //   //  }
-  // };
-
+//Add items to cart
   const addToCart = (product,id) => {
    
     //add to cart
@@ -175,15 +123,70 @@ function App() {
     }else{
       setCart([...cart, newItem])
     }
-    console.log(cartItem)
-      //add the product to cart
-    
   }
+
+  // Increment the quantity
+  const increaseItem = (id) => {
+    const newCart = [...cart].map((item) => {
+      if (item.id === id) {
+        return {...item, amount: item.amount + 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(newCart);
+  
+  };
+
+  //Decrement the quantity
+  const decreaseItem = (id) => {
+   const cartItem = cart.find((item) => {
+     return item.id === id;
+   })
+   if(cartItem){
+    const newCart = [...cart].map((item) => {
+      if (item.id === id) {
+        return {...item, amount: item.amount - 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(newCart);
+  }
+    if (cartItem.amount < 2) {
+      removeItem(id);
+    }
+  };
+
   //Remove the item from cart
-  const removeItem = (product) => {
-    let updatedCart = cart.filter((prod) => prod.id !== product.id );
+  const removeItem = (id) => {
+    let updatedCart = cart.filter((prod) => prod.id !== id );
     setCart(updatedCart)
   }
+  // Total item count in the count
+    // Total item count in the count
+    // const totalItems = () => {
+    //   let totalItems = 0;
+    //   cart.forEach((item) => {
+    //     total += item.amount;
+    //   });
+    //   return totalItems;
+    // };
+  
+    //Total price
+    const totalPrice = () => {
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.price * item.amount;
+      });
+      return total.toFixed(2);
+    };
+  
+    //Empty cart
+    // const emptyCart = () => {
+    //   setCart([]);
+    //   setEmptyCart(true);
+    // };
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -217,7 +220,11 @@ function App() {
           getCategory,
           categories,
           setCategories,
-          removeItem
+          removeItem,
+          increaseItem,
+          decreaseItem,
+          totalItems
+
         }}
       >
         {/* <Toaster/> */}

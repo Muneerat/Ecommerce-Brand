@@ -14,11 +14,11 @@ export default function NavBar({item}) {
    
     const [openMenu , setOpenMenu] = useState(true)
     const {darkMode, toggleTheme} = useContext(AppContext)
-    const {cart} = useContext(AppContext)
+    const {cart,totalItems} = useContext(AppContext)
   return (
    
-    <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200' : 'w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
-    <div className="flex justify-between p-6">
+    <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto border-b-2 border-slate-200' : 'w-full sticky top-0 left-0 z-30 bg-white  items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
+    <div className="flex justify-between p-5">
     <div className="order-2 md:order-none">
     <Link to="/" >
      <img src={Logo} alt='Logo' />
@@ -63,8 +63,9 @@ export default function NavBar({item}) {
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >
-      <span>{cart.length}</span>
-      <GrCart size={25}  />
+      {cart.length > 0 ? <span className=' absolute top-7 right-5 bg-red-00 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
+      {/* <span className=' absolute top-7 right-5 bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{cart.length}</span> */}
+      <GrCart size={26}  />
       </Link>
      
       </div>  
