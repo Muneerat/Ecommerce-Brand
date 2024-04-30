@@ -5,9 +5,11 @@ import { Link, Navigate } from "react-router-dom";
 import RemoveItem from "./removeItem";
 import { GrCart } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { FiTrash2 } from "react-icons/fi";
+
 export default function Cart() {
   const navigate = useNavigate()
-  const { cart,setCart,addToCart,increaseItem, decreaseItem } = useContext(AppContext);
+  const { cart,emptyCart,addToCart,increaseItem, decreaseItem,totalPrice } = useContext(AppContext);
 
   
  const navHome = () => {
@@ -15,51 +17,70 @@ export default function Cart() {
  }
 
   return (
-    <div className="mx-5 my-10 p-5">
-    {cart.length < 1 && <div className="flex justify-center ">
+    <div className="mx-5 p-5">
+    {cart.length < 1 ? <div className="flex justify-center ">
       <div className="text-center">
       <GrCart size={180}/>
       <h2 className="font-bold py-3 text-3xl">Your Cart is Empty</h2>
       <p>Add something to make me happy 🙂️</p>
       <button onClick={() => navHome()} className="p-1 my-4 transition-all duration-300 bg-primary w-full text-white rounded-md">Continue shopping</button>
       </div>
-      </div> }
-      
-    {cart.length > 0 &&   <div className="grid grid-cols-4 item-center justify-items-center shadow-md p-5 my-10 bg-white justify-center ">
-        <h2 className="">Product</h2>
-        <h2>price</h2>
-        <h2>Quantity</h2>
-        <h2>Subtotal</h2>
-      </div>}
-
+      </div> :
+      <div>
+      <div className="flex flex-col gap-y-2 py-4 h-[520px] lg:h-[610px] overflow-y-auto overflow-x-hidden border-b">
+      <h1 className="text-xl font-semibold">My cart</h1>
       {cart.map((item, index) => {
         return (
-          <div className="shadow-md my-10 p-3">
+          <div className="shadow-md p-3 flex gap-x-4 py-2 lg:px-6 border-b border-gray-200 w-full font-light">
             <div
-              className="grid grid-cols-4 justify-items-center p-2  bg-white"
+              className="w-full min-h-[150px] flex items-center gap-x-4"
               key={index}
             >
-              <div className="flex justify- items-">
+              
+              <Link>
                 <img
                   src={item?.image}
                   alt={item?.title}
-                  className="w-12 h-12"
+                  className="max-w-[80px]"
                 />
-                <h2 className="p-2">{item.title.substring(0, 20)}</h2>
+              </Link>
+              <div className="flex flex-col w-full ml-4">
+              <div className="flex justify-between mb-2">
+              {/* <Link to={`/${item?.id}`}>{item?.title}</Link> */}
+                <h2 className="">{item.title.substring(0, 20)}</h2>
+              <RemoveItem product={item.id} />
               </div>
-              <h2>{item?.price}</h2>
-              <div>
-                <button onClick={() => increaseItem(item.id)} className="border bg-primary text-white py-1 px-3">+</button>
-                <button className="border py-1 px-3">{item?.amount}</button>
+              <div className="flex ">
+                <div className="flex flex-1">
                 <button onClick={() => decreaseItem(item.id)} className="border bg-primary text-white py-1 px-3">-</button>
+                <button className="border py-1 px-3">{item?.amount}</button>
+                <button onClick={() => increaseItem(item.id)} className="border bg-primary text-white py-1 px-3">+</button>
+                </div>
+                <h2 className="flex-1 flex items-center justify-around">{item?.price}</h2>
+              <h2 className="flex-1 flex items-center justify-around">{(item?.price * item?.amount).toFixed(2)}</h2>
               </div>
-              {/* <h2>{item?.amount}</h2> */}
-              <h2>{(item?.price * item?.amount).toFixed(2)}</h2>
+              </div>
+             
             </div>
-            <RemoveItem product={item.id} />
           </div>
         );
       })}
+      </div>
+      <div className="flex flex-col gap-y-3 py-4 mt-4">
+        <div className="flex w-full justify-between justify-items-center">
+         <div className="uppercase font-semibold">
+           <span className="mr-2">Total:</span>${totalPrice.toFixed(2)}
+         </div>
+         <div onClick={emptyCart} className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl">
+          <FiTrash2 />
+         </div>
+        </div>
+      </div>
+      </div>
+       }
+      
+     
     </div>
   );
 }
+

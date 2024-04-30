@@ -31,10 +31,10 @@ export default function NavBar({item}) {
         <Links to='/' text='Home'/>
       </li>
       <li>
-      <Links to='/allProducts' text='Products'/>
+      <Links to='/about' text='About'/>
       </li>
       <li>
-      <Links to='/about' text='About'/>
+      <Links to='/allProducts' text='Products'/>
       </li>
       <li>
       <Links to='/signup' text='SignUp'/>
@@ -63,8 +63,7 @@ export default function NavBar({item}) {
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >
-      {cart.length > 0 ? <span className=' absolute top-7 right-5 bg-red-00 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
-      {/* <span className=' absolute top-7 right-5 bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{cart.length}</span> */}
+      {cart.length > 0 ? <span className=' absolute top-8 right-6 bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
       <GrCart size={26}  />
       </Link>
      

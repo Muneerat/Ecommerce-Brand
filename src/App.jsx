@@ -1,5 +1,6 @@
 //import { useState, useContext } from 'react';
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Routes, Route, useLocation } from "react-router-dom";
 import { AppContext } from "./Contexts/AppContent";
 import NavBar from "./Components/NavBar";
 import Home from "./Pages/Home";
@@ -15,9 +16,11 @@ import SignIn from "./Pages/Auth/SignIn";
 import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
 import Cart from "./Components/cart";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   // const [loading, setLoading] = useState(false);
+  //  const { pathname } = useLocation();
   const [cart, setCart] = useState([]);
   const [notice, setNotice] = useState({});
   const [errors, setErrors] = useState({});
@@ -25,8 +28,18 @@ function App() {
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [emptyCart, setEmptyCart] = useState(false);
+  // const [emptyCart, setEmptyCart] = useState(false);
   const [totalItems, setTotalItems] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
+  
+
+
+
+
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [pathname])
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -90,7 +103,6 @@ function App() {
   const getCart = async () => {
     try {
       const response = await axios.get(`https://fakestoreapi.com/carts/${id})`);
-      console.log(response.data);
       setCart(response.data.products);
       // console.log(response.data.product);
     } catch (error) {
@@ -119,7 +131,7 @@ function App() {
         }
       })
       setCart(newCart);
-      console.log(newCart)
+  
     }else{
       setCart([...cart, newItem])
     }
@@ -134,6 +146,7 @@ function App() {
         return item;
       }
     });
+ 
     setCart(newCart);
   
   };
@@ -163,30 +176,43 @@ function App() {
     let updatedCart = cart.filter((prod) => prod.id !== id );
     setCart(updatedCart)
   }
-  // Total item count in the count
-    // Total item count in the count
-    // const totalItems = () => {
-    //   let totalItems = 0;
-    //   cart.forEach((item) => {
-    //     total += item.amount;
-    //   });
-    //   return totalItems;
-    // };
+
+//Total amount of items in the cart
+    useEffect(() => {
+      if (cart) {
+        const totalItems = cart.reduce((accumulator, currentItem) => {
+          return accumulator + currentItem.amount;
+        }, 0);
+        setTotalItems(totalItems);
+      }
+    });
   
     //Total price
-    const totalPrice = () => {
-      let total = 0;
-      cart.forEach((item) => {
-        total += item.price * item.amount;
-      });
-      return total.toFixed(2);
-    };
+   useEffect(() => {
+    if(cart){
+      const totalPrice = cart.reduce((accumulator, currentItem) =>{
+        return accumulator + (currentItem.amount * currentItem.price)
+      },0)
+      setTotalPrice(totalPrice);
+    }
+   })
   
-    //Empty cart
-    // const emptyCart = () => {
-    //   setCart([]);
-    //   setEmptyCart(true);
-    // };
+    //clear cart
+    const emptyCart = () => {
+      setCart([]);
+    };
+    // useEffect(()=>{
+    //   window.scrollTo(0, 0);
+    // },[])
+    const scrollToTop = () => {
+      window.scrollTo(0, 0)
+      setNotice({ message: "You are on the home page", type: "success" });
+  }
+
+    // const handleHome = () => {
+    //   Navigate('')
+    //   setNotice({ message: "You are on the home page", type: "success" });
+    // }
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -223,7 +249,10 @@ function App() {
           removeItem,
           increaseItem,
           decreaseItem,
-          totalItems
+          totalItems,
+          totalPrice,
+          emptyCart,
+          scrollToTop
 
         }}
       >
@@ -238,9 +267,15 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signIn" element={<SignIn />} />
+
+            <Route className="/products">
+
             <Route path=":id" element={<SingleProduct />} />
             <Route path="/allProducts" element={<AllProduct />} />
+            <Route path="*" element={<NotFound />}/>
+            </Route>
             <Route path="/cart" element={<Cart />}/>
+            <Route path="*" element={<NotFound />}/>
           </Routes>
           <Footer />
         </Router>
