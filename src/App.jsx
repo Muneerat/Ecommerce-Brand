@@ -1,11 +1,11 @@
 //import { useState, useContext } from 'react';
-import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Routes, Route, useLocation } from "react-router-dom";
 import { AppContext } from "./Contexts/AppContent";
 import NavBar from "./Components/NavBar";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-// import SignUp from './Pages/SignUp';
 import axios from "axios";
 import SingleProduct from "./Pages/SingleProduct";
 import { useEffect, useState } from "react";
@@ -15,9 +15,11 @@ import SignIn from "./Pages/Auth/SignIn";
 import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
 import Cart from "./Components/cart";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   // const [loading, setLoading] = useState(false);
+  //  const { pathname } = useLocation();
   const [cart, setCart] = useState([]);
   const [notice, setNotice] = useState({});
   const [errors, setErrors] = useState({});
@@ -25,6 +27,18 @@ function App() {
   const [ourProducts, setOurProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  // const [emptyCart, setEmptyCart] = useState(false);
+  const [totalItems, setTotalItems] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
+  
+
+
+
+
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [pathname])
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
@@ -88,69 +102,14 @@ function App() {
   const getCart = async () => {
     try {
       const response = await axios.get(`https://fakestoreapi.com/carts/${id})`);
-      console.log(response.data);
       setCart(response.data.products);
       // console.log(response.data.product);
     } catch (error) {
-      console.error("Error fetching cart:", error);
+     // console.error("Error fetching cart:", error);
     }
   };
 
-  // get existing cart
-  // check if product exists in cart and increase the qty
-  // if it doesn\t, add product
-  // submit new to api
-  // if it doesn't exist add product to cart and if it exist increment qty to current quantity number
- 
-  // const addToCart = async (product) => {
-  //   let existingCart = cart ?? [];
-  //   let productExist = existingCart.find((prod) => (prod.id = product.id));
-  //    console.log(productExist)
-
-  //   if (productExist) {
-  //     productExist.quantity += 1;
-  //     let index = existingCart.findIndex((prod) => prod.id === product.id);
-  //     existingCart[index] = productExist;
-  //   } else {
-  //     existingCart.push({
-  //       productid: product.id,
-  //       quantity: 1,
-  //     });
-  //   }
-  //   try {
-  //     // let response = await axios.post('https://fakestoreapi.com/carts', JSON.stringify(payload));
-  //     let response = await axios.post("https://fakestoreapi.com/carts", {
-  //       userid: "5",
-  //       // date: new Date().getDate(),
-  //       // products: existingCart,
-  //       title: title,
-  //       price: price,
-  //       description: description,
-  //       image: image,
-  //       category: category,
-
-  //     });
-  //     console.log(response.data);
-  //     setCart(response.data);
-  //     getCart();
-  //   } catch (error) {
-  //     console.error("Error adding to cart:", error);
-  //   }
-
-  //   //  let existingProduct = cart.find((productID)  => productID.id === productID.id);
-  //   //  console.log("GOT HERE")
-  //   //  if(existingProduct) {
-  //   //   let index = cart.findIndex((productID) => productID.id === productID.id);
-  //   //   let newCart = [...cart];
-
-  //   //   newCart[index].qty = existingProduct.qty + 1;
-  //   //   setCart(newCart);
-  //   //  } else {
-  //   //    product.qty = 1;
-  //   //    setCart((prev) => [...prev, product])
-  //   //  }
-  // };
-
+//Add items to cart
   const addToCart = (product,id) => {
    
     //add to cart
@@ -171,19 +130,96 @@ function App() {
         }
       })
       setCart(newCart);
-      console.log(newCart)
+      setNotice({ message: `${cartItem.title} in cart increased.`, type: "success" });
+  
     }else{
       setCart([...cart, newItem])
+      setNotice({ message: `Item added to cart.`, type: "success" });
     }
-    console.log(cartItem)
-      //add the product to cart
+  }
+
+  // Increment the quantity
+  const increaseItem = (id) => {
+    const newCart = [...cart].map((item) => {
+      if (item.id === id) {
+        return {...item, amount: item.amount + 1 };
+      } else {
+        return item;
+      }
+    });
+ 
+    setCart(newCart);
+    setNotice({ message: `Item added to cart.`, type: "success" });
+  
+  };
+
+  //Decrement the quantity
+  const decreaseItem = (id) => {
+   const cartItem = cart.find((item) => {
+     return item.id === id;
+   })
+   if(cartItem){
+    const newCart = [...cart].map((item) => {
+      if (item.id === id) {
+        return {...item, amount: item.amount - 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(newCart);
+    setNotice({ message: `${cartItem.title} decrease from cart.`, type: "error" });
+
+  }
+    if (cartItem.amount < 2) {
+      removeItem(id);
+      setNotice({ message: `${cartItem.title} removed from cart.`, type: "error" });
+    }
+  };
+
+  //Remove the item from cart
+  const removeItem = (id) => {
+    let updatedCart = cart.filter((prod) => prod.id !== id );
+    setCart(updatedCart)
+    setNotice({ message: `  Item removed from cart.`, type: "error" });
+  }
+
+//Total amount of items in the cart
+    useEffect(() => {
+      if (cart) {
+        const totalItems = cart.reduce((accumulator, currentItem) => {
+          return accumulator + currentItem.amount;
+        }, 0);
+        setTotalItems(totalItems);
+      }
+    });
+  
+    //Total price
+   useEffect(() => {
+    if(cart){
+      const totalPrice = cart.reduce((accumulator, currentItem) =>{
+        return accumulator + (currentItem.amount * currentItem.price)
+      },0)
+      setTotalPrice(totalPrice);
+    }
+   })
+  
+    //clear cart
+    const emptyCart = () => {
+      setCart([]);
+      setNotice({ message: `All item removed from cart.`, type: "error" });
+    };
+    // useEffect(()=>{
+    //   window.scrollTo(0, 0);
+    // },[])
+    const scrollToTop = () => {
+      window.scrollTo(0, 0)
     
   }
-  //Remove the item from cart
-  const removeItem = (product) => {
-    let updatedCart = cart.filter((prod) => prod.id !== product.id );
-    setCart(updatedCart)
-  }
+
+    // const handleHome = () => {
+    //   Navigate('')
+    //   setNotice({ message: "You are on the home page", type: "success" });
+    // }
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -191,7 +227,8 @@ function App() {
         toast.success(notice.message, {
           position: "top-right",
         });
-      } else {
+      } 
+      else {
         toast.error(notice.message, {
           position: "top-right",
         });
@@ -217,7 +254,14 @@ function App() {
           getCategory,
           categories,
           setCategories,
-          removeItem
+          removeItem,
+          increaseItem,
+          decreaseItem,
+          totalItems,
+          totalPrice,
+          emptyCart,
+          scrollToTop
+
         }}
       >
         {/* <Toaster/> */}
@@ -231,9 +275,15 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signIn" element={<SignIn />} />
+
+            <Route path="/products">
+
             <Route path=":id" element={<SingleProduct />} />
-            <Route path="/allProducts" element={<AllProduct />} />
+            <Route path="allProducts" element={<AllProduct />} />
+            <Route path="*" element={<NotFound />}/>
+            </Route>
             <Route path="/cart" element={<Cart />}/>
+            <Route path="*" element={<NotFound />}/>
           </Routes>
           <Footer />
         </Router>

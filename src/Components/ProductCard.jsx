@@ -14,12 +14,13 @@ export default function ProductCard({ product }) {
   return (
     <div>
     {/* {`${product.id}`} */}
-      <Link to='' className="">
+     
         <div
           className=" shadow-xl relative h-3/4 bg-white hover:scale-105 hover:backdrop-blur-none duration-300 backdrop-blur transition-all ease-in-out"
           onMouseEnter={() => setHover(product.id)}
           onMouseLeave={() => setHover('')}
         >
+         <Link to={`/products/${product.id}`}  className="">
           <div className="right-4 absolute text-primary ">
             <FaRegHeart className="my-3 hover:text-black" />
             {/* <HiEye className="my-3 hover:text-black " /> */}
@@ -31,6 +32,7 @@ export default function ProductCard({ product }) {
               alt={title}
             />
           </div>
+          </Link>
           {isHover == product.id && (
             <button 
                className="absolute bottom-0 p-1 transition-all duration-300 bg-primary w-full text-white"
@@ -44,7 +46,7 @@ export default function ProductCard({ product }) {
           <p>{product.title.substring(0, 22)}</p>
           <p className="text-slate-700">${product.price}</p>
         </div>
-      </Link>
+      
     </div>
   );
 }

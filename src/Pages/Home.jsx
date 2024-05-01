@@ -1,7 +1,7 @@
 import React from "react";
 import Categories from "../Components/Categories";
 import Layouts from "../Components/Layouts";
-import BgImg from "../assets/Banner-img.png";
+import BgImg from "../assets/Banner-img.jpg";
 import Button from "../Components/Button";
 import Tabs from "../Components/Tabs";
 import LimitedProducts from "../Components/LimitedProducts";
@@ -28,10 +28,9 @@ export default function () {
 
    useEffect(() => {
      const typed = new Typed(el.current, {
-       strings: ['Electronic items', ],
+       strings: ['Unlock Your Style', ],
        typeSpeed: 150,
        backSpeed: 150,
-       loop: true,
        showCursor: false,
        startDelay: 300,
        backDelay: 300,
@@ -60,23 +59,26 @@ export default function () {
   //   };
   // }, []);
   return (
-    <Layouts>
-      {/* <div className='h-1 w-full bg-slate-200'></div> */}
-      {/* <Categories /> */}
+    <>
       <div
-        className="bg-cover bg-center max-h-full h-[60vh]"
+        className="bg-cover max-h-full h-[70vh] bg-center md:bg-top"
         style={{
           backgroundImage: `url(${BgImg})`,
         }}
       >
-        <div className="p-10 pl-20 flex flex-col my-auto">
-          <h1 className="pt-4 text-4xl ">Latest trending</h1>
-          <h2 className="font-bold pt-3 text-2xl md:text-7xl " ref={el}></h2>
-          
-          <Button text="Learn more" className="text-primary bg-white hover:text-white" />
-        </div>
+        <div className="p-10 md:pl-20 flex flex-col my-auto justify-center align-middle pt-32 ">
+          <h1 className="flex py-4 text-2xl font-light text-[#0f1235]">Introducing </h1>
+          <h2 className="font-bold py-5 text-3xl md:text-8xl text-[#0f1235]" ref={el}></h2>
+          <Link to="/allProducts">
+          <Button text="Explore" className="text-white bg-primary hover:text-white" />
+          </Link>
+         
+        </div> 
       </div>
-      <div className="mt-5">
+    <Layouts>
+      {/* <div className='h-1 w-full bg-slate-200'></div> */}
+      {/* <Categories /> */}
+      <div className="pt-5">
         <Tabs text="Today's" />
         <LimitedProducts />
         {/* <Categories /> */}
@@ -129,15 +131,15 @@ export default function () {
             header="FREE AND FAST DELIVERY"
             text="Free delivery for all orders over $140"
           />
-          <Featured
+            <Featured
             img={IconCustomer}
-            header="FREE AND FAST DELIVERY"
-            text="Free delivery for all orders over $140"
+            header="24/7 CUSTOMER SERVICE"
+            text="Friendly 24/7 customer support"
           />
           <Featured
             img={IconSecure}
-            header="FREE AND FAST DELIVERY"
-            text="Free delivery for all orders over $140"
+            header="MONEY BACK GUARANTEE"
+            text="We return money within 30 days"
           />
         </div>
 
@@ -150,5 +152,7 @@ export default function () {
         <div className='h-[70vh] bg-cover bg-center w-3/6' style={{ backgroundImage: `url(${phone})` }}></div>
       </div> */}
     </Layouts>
+
+    </>
   );
 }

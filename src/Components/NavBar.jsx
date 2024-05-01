@@ -14,27 +14,27 @@ export default function NavBar({item}) {
    
     const [openMenu , setOpenMenu] = useState(true)
     const {darkMode, toggleTheme} = useContext(AppContext)
-    const {cart} = useContext(AppContext)
+    const {cart,totalItems,scrollToTop} = useContext(AppContext)
   return (
    
-    <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200' : 'w-full max-w-screen-2xl items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
-    <div className="flex justify-between p-6">
+    <div className={`${darkMode ? '' : 'w-full sticky top-0 left-0 z-30 bg-white  items-center mx-auto p-2 border-b-2 border-slate-200'} `}>
+    <div className="flex justify-between p-5 max-w-screen-2xl items-center mx-auto">
     <div className="order-2 md:order-none">
-    <Link to="/" >
+    <Link to="/"   onClick={scrollToTop}>
      <img src={Logo} alt='Logo' />
     </Link>
    
     </div>
     <div className='order-1 md:order-none flex items-center'>
-        <ul className={`max-w- mx-auto items-center gap-x  md:flex   ${ !openMenu ? 'bg-primary flex-col w-screen h-screen absolute top-10 left-0 z-10     ' : 'hidden'}`}>
+        <ul className={`max-w- mx-auto items-center gap-x  md:flex   ${ !openMenu ? 'bg-white text-2xl py-4 flex-col w-screen h-screen absolute top-[6.5rem] left-0 z-10 transition-all duration-700 ease-in-out    ' : 'hidden'}`}>
       <li>
         <Links to='/' text='Home'/>
       </li>
       <li>
-      <Links to='/allProducts' text='Products'/>
+      <Links to='/about' text='About'/>
       </li>
       <li>
-      <Links to='/about' text='About'/>
+      <Links to='products/allProducts' text='Products'/>
       </li>
       <li>
       <Links to='/signup' text='SignUp'/>
@@ -46,38 +46,38 @@ export default function NavBar({item}) {
        {/* <GiHamburgerMenu size={30} />  */}
        {/* <HiX /> */}
      </button>
-     <button onClick={toggleTheme}
+     {/* <button onClick={toggleTheme}
      >
       {darkMode ? "darkMode" : "lightmode"}
-     </button>
+     </button> */}
     </div>
     <div className='flex items-center order-3'>
-      <form className=' items-center hidden md:flex '>
+      {/* <form className=' items-center hidden md:flex '>
       <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}
        afterContent={<IoSearch />}
        />
-      </form>
+      </form> */}
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >
-      <span>{cart.length}</span>
-      <GrCart size={25}  />
+      {cart.length > 0 ? <span className=' absolute top-8 right-6 bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
+      <GrCart size={26}  />
       </Link>
      
       </div>  
     </div>
     </div>
-    <form className='items-center flex md:hidden w-full '>
+    {/* <form className='items-center flex md:hidden w-full '>
       <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}
        afterContent={<IoSearch />}
        />
-      </form>
+      </form> */}
     </div>
   )
 }
