@@ -61,14 +61,14 @@ export default function () {
   return (
     <>
       <div
-        className="bg-cover max-h-full h-[70vh]"
+        className="bg-cover max-h-full h-[70vh] bg-center md:bg-top"
         style={{
           backgroundImage: `url(${BgImg})`,
         }}
       >
-        <div className="p-10 pl-20 flex flex-col my-auto justify-center align-middle pt-32 ">
+        <div className="p-10 md:pl-20 flex flex-col my-auto justify-center align-middle pt-32 ">
           <h1 className="flex py-4 text-2xl font-light text-[#0f1235]">Introducing </h1>
-          <h2 className="font-bold py-5 text-2xl md:text-8xl text-[#0f1235]" ref={el}></h2>
+          <h2 className="font-bold py-5 text-3xl md:text-8xl text-[#0f1235]" ref={el}></h2>
           <Link to="/allProducts">
           <Button text="Explore" className="text-white bg-primary hover:text-white" />
           </Link>

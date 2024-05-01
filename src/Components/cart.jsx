@@ -18,7 +18,7 @@ export default function Cart() {
 
   return (
     <div className="mx-5 p-5">
-    {cart.length < 1 ? <div className="flex justify-center ">
+    {cart.length < 1 ? <div className="flex justify-center h-[520px] items-center">
       <div className="text-center">
       <GrCart size={180}/>
       <h2 className="font-bold py-3 text-3xl">Your Cart is Empty</h2>
@@ -31,7 +31,7 @@ export default function Cart() {
       <h1 className="text-xl font-semibold">My cart</h1>
       {cart.map((item, index) => {
         return (
-          <div className="shadow-md p-3 flex gap-x-4 py-2 lg:px-6 border-b border-gray-200 w-full font-light">
+          <div className="shadow-md md:p-3 flex gap-x-4 py-2 lg:px-6 border-b border-gray-200 w-full font-light">
             <div
               className="w-full min-h-[150px] flex items-center gap-x-4"
               key={index}
@@ -44,7 +44,7 @@ export default function Cart() {
                   className="max-w-[80px]"
                 />
               </Link>
-              <div className="flex flex-col w-full ml-4">
+              <div className="flex flex-col w-full md:ml-4">
               <div className="flex justify-between mb-2">
               {/* <Link to={`/${item?.id}`}>{item?.title}</Link> */}
                 <h2 className="">{item.title.substring(0, 20)}</h2>

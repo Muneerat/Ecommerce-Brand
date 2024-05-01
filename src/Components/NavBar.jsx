@@ -14,19 +14,19 @@ export default function NavBar({item}) {
    
     const [openMenu , setOpenMenu] = useState(true)
     const {darkMode, toggleTheme} = useContext(AppContext)
-    const {cart,totalItems} = useContext(AppContext)
+    const {cart,totalItems,scrollToTop} = useContext(AppContext)
   return (
    
-    <div className={`${darkMode ? 'bg-red-400 w-full max-w-screen-2xl items-center mx-auto border-b-2 border-slate-200' : 'w-full sticky top-0 left-0 z-30 bg-white  items-center mx-auto p-2 border-b-2 border-slate-200'}`}>
-    <div className="flex justify-between p-5">
+    <div className={`${darkMode ? '' : 'w-full sticky top-0 left-0 z-30 bg-white  items-center mx-auto p-2 border-b-2 border-slate-200'} `}>
+    <div className="flex justify-between p-5 max-w-screen-2xl items-center mx-auto">
     <div className="order-2 md:order-none">
-    <Link to="/" >
+    <Link to="/"   onClick={scrollToTop}>
      <img src={Logo} alt='Logo' />
     </Link>
    
     </div>
     <div className='order-1 md:order-none flex items-center'>
-        <ul className={`max-w- mx-auto items-center gap-x  md:flex   ${ !openMenu ? 'bg-primary flex-col w-screen h-screen absolute top-10 left-0 z-10     ' : 'hidden'}`}>
+        <ul className={`max-w- mx-auto items-center gap-x  md:flex   ${ !openMenu ? 'bg-white text-2xl py-4 flex-col w-screen h-screen absolute top-[6.5rem] left-0 z-10 transition-all duration-700 ease-in-out    ' : 'hidden'}`}>
       <li>
         <Links to='/' text='Home'/>
       </li>
@@ -34,7 +34,7 @@ export default function NavBar({item}) {
       <Links to='/about' text='About'/>
       </li>
       <li>
-      <Links to='/allProducts' text='Products'/>
+      <Links to='products/allProducts' text='Products'/>
       </li>
       <li>
       <Links to='/signup' text='SignUp'/>
@@ -46,10 +46,10 @@ export default function NavBar({item}) {
        {/* <GiHamburgerMenu size={30} />  */}
        {/* <HiX /> */}
      </button>
-     <button onClick={toggleTheme}
+     {/* <button onClick={toggleTheme}
      >
       {darkMode ? "darkMode" : "lightmode"}
-     </button>
+     </button> */}
     </div>
     <div className='flex items-center order-3'>
       {/* <form className=' items-center hidden md:flex '>
@@ -70,14 +70,14 @@ export default function NavBar({item}) {
       </div>  
     </div>
     </div>
-    <form className='items-center flex md:hidden w-full '>
+    {/* <form className='items-center flex md:hidden w-full '>
       <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}
        afterContent={<IoSearch />}
        />
-      </form>
+      </form> */}
     </div>
   )
 }

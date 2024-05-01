@@ -80,8 +80,8 @@ export default function SignIn() {
 
   return (
     <Layouts>
-      <div className="flex w-full">
-        <div className="w-3/6">
+      <div className="flex w-full flex-col md:flex-row ">
+        <div className="md:w-3/6">
           <img src={sign} alt="SignIn image" className="w" />
         </div>
         <div className="flex flex-col justify-center  align-middle mx-auto">
@@ -91,7 +91,7 @@ export default function SignIn() {
             <div className="max-w-xs mx-auto my-3">
               <FormLabel>Enter your Username</FormLabel>
               <FormInput
-                placeholder="Username"
+                placeholder="mor_2314 "
                 name="username"
                 id="username"
                 value={username}
@@ -104,7 +104,7 @@ export default function SignIn() {
               <FormLabel>Enter your Password</FormLabel>
               <FormInput
                 type="password"
-                placeholder="********"
+                placeholder="83r5^_"
                 name="password"
                 autoComplete
                 id="password"

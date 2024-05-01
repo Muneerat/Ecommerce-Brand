@@ -6,7 +6,6 @@ import NavBar from "./Components/NavBar";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-// import SignUp from './Pages/SignUp';
 import axios from "axios";
 import SingleProduct from "./Pages/SingleProduct";
 import { useEffect, useState } from "react";
@@ -106,7 +105,7 @@ function App() {
       setCart(response.data.products);
       // console.log(response.data.product);
     } catch (error) {
-      console.error("Error fetching cart:", error);
+     // console.error("Error fetching cart:", error);
     }
   };
 
@@ -131,11 +130,11 @@ function App() {
         }
       })
       setCart(newCart);
-      setNotice({ message: `cartItem.amount in cart increased.`, type: "primary" });
+      setNotice({ message: `${cartItem.title} in cart increased.`, type: "success" });
   
     }else{
       setCart([...cart, newItem])
-      setNotice({ message: `cartItem.amount in cart increased.`, type: "success" });
+      setNotice({ message: `Item added to cart.`, type: "success" });
     }
   }
 
@@ -150,6 +149,7 @@ function App() {
     });
  
     setCart(newCart);
+    setNotice({ message: `Item added to cart.`, type: "success" });
   
   };
 
@@ -167,9 +167,12 @@ function App() {
       }
     });
     setCart(newCart);
+    setNotice({ message: `${cartItem.title} decrease from cart.`, type: "error" });
+
   }
     if (cartItem.amount < 2) {
       removeItem(id);
+      setNotice({ message: `${cartItem.title} removed from cart.`, type: "error" });
     }
   };
 
@@ -177,6 +180,7 @@ function App() {
   const removeItem = (id) => {
     let updatedCart = cart.filter((prod) => prod.id !== id );
     setCart(updatedCart)
+    setNotice({ message: `  Item removed from cart.`, type: "error" });
   }
 
 //Total amount of items in the cart
@@ -202,6 +206,7 @@ function App() {
     //clear cart
     const emptyCart = () => {
       setCart([]);
+      setNotice({ message: `All item removed from cart.`, type: "error" });
     };
     // useEffect(()=>{
     //   window.scrollTo(0, 0);
@@ -222,7 +227,8 @@ function App() {
         toast.success(notice.message, {
           position: "top-right",
         });
-      } else {
+      } 
+      else {
         toast.error(notice.message, {
           position: "top-right",
         });
@@ -270,10 +276,10 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signIn" element={<SignIn />} />
 
-            <Route className="/products">
+            <Route path="/products">
 
             <Route path=":id" element={<SingleProduct />} />
-            <Route path="/allProducts" element={<AllProduct />} />
+            <Route path="allProducts" element={<AllProduct />} />
             <Route path="*" element={<NotFound />}/>
             </Route>
             <Route path="/cart" element={<Cart />}/>

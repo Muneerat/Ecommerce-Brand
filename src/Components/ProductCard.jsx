@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
           onMouseEnter={() => setHover(product.id)}
           onMouseLeave={() => setHover('')}
         >
-         <Link to={`${product.id}`}  className="">
+         <Link to={`/products/${product.id}`}  className="">
           <div className="right-4 absolute text-primary ">
             <FaRegHeart className="my-3 hover:text-black" />
             {/* <HiEye className="my-3 hover:text-black " /> */}

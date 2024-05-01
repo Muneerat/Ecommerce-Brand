@@ -56,7 +56,7 @@ export default function OurProduct() {
      </div>}
      {!showAllProducts && (
         <div className='flex justify-center w-full mx-auto'>
-       <Link to='/allProducts'>
+       <Link to='products/allProducts'>
         <Button 
                onClick={handleViewAllProducts}
                text='View All Products'

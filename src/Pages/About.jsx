@@ -14,15 +14,15 @@ export default function About() {
         <div className="flex flex-1 flex-col text-xl justify-center px-6">
           <h1 className="text-3xl font-semibold">Our Story</h1>
           <p className="py-4">
-            Launced in 2015, Exclusive is South Asia’s premier online shopping
-            makterplace with an active presense in Bangladesh. Supported by wide
+            Launched in 2015, Exclusive is South Asia’s premier online shopping
+            marketplace with an active presence in Bangladesh. Supported by wide
             range of tailored marketing, data and service solutions, Exclusive
-            has 10,500 sallers and 300 brands and serves 3 millioons customers
+            has 10,500 sellers and 300 brands and serves 3 millions customers
             across the region.
           </p>
           <p className="py-4">
             Exclusive has more than 1 Million products to offer, growing at a
-            very fast. Exclusive offers a diverse assotment in categories
+            very fast. Exclusive offers a diverse assortment in categories
             ranging from consumer.
           </p>
         </div>

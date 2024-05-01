@@ -94,8 +94,8 @@ if (!name && !name.trim()) {
   // })
   return (
     <Layouts className="p-0">
-      <div className="flex w-full p-0">
-        <div className="w-3/6">
+      <div className="flex w-full flex-col md:flex-row p-0">
+        <div className="md:w-3/6">
           <img src={sign} alt="" className="w" />
         </div>
         <div className="flex flex-col justify-center  align-middle mx-auto">
