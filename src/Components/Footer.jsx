@@ -25,7 +25,7 @@ export default function Footer() {
   }
   return (
     <div className="bg-white">
-      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-x-2.5 p-8  items-center justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3 p-8  items-center md:justify-items-center">
         <div>
         <Link onClick={scrollToTop} to="/">
           <img src={Logo} alt="Logo" />
@@ -66,13 +66,13 @@ export default function Footer() {
         <div>
           <h2 className="font-bold text-xl">Account</h2>
           <div className="flex flex-col my-3">
-            <Link onClick={scrollToTop} to="/signup" className="py-1">
+            <Link onClick={scrollToTop} to="/signup" className="py-1 hover:translate-x-3 transition-all duration-200">
               Login / Register
             </Link>
-            <Link onClick={scrollToTop} to="/cart" className="py-1">
+            <Link onClick={scrollToTop} to="/cart" className="py-1 hover:translate-x-3 transition-all duration-200">
               Cart
             </Link>
-            <Link to="" className="py-1">
+            <Link to="" className="py-1 hover:translate-x-3 transition-all duration-200">
               Products
             </Link>
           </div>

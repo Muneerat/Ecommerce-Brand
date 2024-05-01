@@ -16,7 +16,7 @@ export default function Links({
        onClick={scrollToTop}
        to={to}
        className={
-        `before:[''] items-center before:w-0 h-4 before:rounded-md before:absolute before:inset-y-7 m-2 relative before:h-1 before:bg-primary before:right-0 hover:text-primary hover:before:w-full hover:before:left-0 before:transition-all before:ease-in-out before:duration-400`}>
+        `before:[''] items-center before:w-0 h-4 before:rounded-md before:absolute before:inset-y-7 m-5 relative before:h-1 before:bg-primary before:right-0 hover:text-primary hover:before:w-full hover:before:left-0 before:transition-all before:ease-in-out before:duration-400`}>
         {text}
     </Link>
   )

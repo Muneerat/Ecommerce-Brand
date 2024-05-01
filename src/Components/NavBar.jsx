@@ -52,14 +52,14 @@ export default function NavBar({item}) {
      </button>
     </div>
     <div className='flex items-center order-3'>
-      <form className=' items-center hidden md:flex '>
+      {/* <form className=' items-center hidden md:flex '>
       <FormSearch 
        placeholder="What are you looking for?"
        className=' rounded-l-lg block w-full placeholder-grey-400'
        maxLength={255}
        afterContent={<IoSearch />}
        />
-      </form>
+      </form> */}
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >

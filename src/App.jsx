@@ -131,9 +131,11 @@ function App() {
         }
       })
       setCart(newCart);
+      setNotice({ message: `cartItem.amount in cart increased.`, type: "primary" });
   
     }else{
       setCart([...cart, newItem])
+      setNotice({ message: `cartItem.amount in cart increased.`, type: "success" });
     }
   }
 
@@ -206,7 +208,7 @@ function App() {
     // },[])
     const scrollToTop = () => {
       window.scrollTo(0, 0)
-      setNotice({ message: "You are on the home page", type: "success" });
+    
   }
 
     // const handleHome = () => {

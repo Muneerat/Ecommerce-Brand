@@ -1,7 +1,7 @@
 import React from "react";
 import Categories from "../Components/Categories";
 import Layouts from "../Components/Layouts";
-import BgImg from "../assets/Banner-img.png";
+import BgImg from "../assets/Banner-img.jpg";
 import Button from "../Components/Button";
 import Tabs from "../Components/Tabs";
 import LimitedProducts from "../Components/LimitedProducts";
@@ -28,7 +28,7 @@ export default function () {
 
    useEffect(() => {
      const typed = new Typed(el.current, {
-       strings: ['Electronic items', ],
+       strings: ['Unlock Your Style', ],
        typeSpeed: 150,
        backSpeed: 150,
        showCursor: false,
@@ -61,17 +61,19 @@ export default function () {
   return (
     <>
       <div
-        className="bg-cover bg-center max-h-full h-[80vh]"
+        className="bg-cover max-h-full h-[70vh]"
         style={{
           backgroundImage: `url(${BgImg})`,
         }}
       >
-        <div className="p-10 pl-20 flex flex-col my-auto justify-center items-center">
-          <h1 className="py-4 text-4xl ">Latest trending</h1>
-          <h2 className="font-bold py-3 text-2xl md:text-9xl " ref={el}></h2>
-          
-          <Button text="Learn more" className="text-primary bg-white hover:text-white" />
-        </div>
+        <div className="p-10 pl-20 flex flex-col my-auto justify-center align-middle pt-32 ">
+          <h1 className="flex py-4 text-2xl font-light text-[#0f1235]">Introducing </h1>
+          <h2 className="font-bold py-5 text-2xl md:text-8xl text-[#0f1235]" ref={el}></h2>
+          <Link to="/allProducts">
+          <Button text="Explore" className="text-white bg-primary hover:text-white" />
+          </Link>
+         
+        </div> 
       </div>
     <Layouts>
       {/* <div className='h-1 w-full bg-slate-200'></div> */}
