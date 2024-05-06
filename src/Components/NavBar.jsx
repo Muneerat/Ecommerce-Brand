@@ -63,7 +63,7 @@ export default function NavBar({item}) {
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >
-      {cart.length > 0 ? <span className=' absolute top-8 right-6 bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
+      {cart.length > 0 ? <span className=' absolute top-7 right- bg-red-600 rounded-full text-white h-5 w-5  text-center text-base'>{totalItems}</span> : ""}
       <GrCart size={26}  />
       </Link>
      
