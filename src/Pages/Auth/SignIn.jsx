@@ -80,7 +80,7 @@ export default function SignIn() {
 
   return (
     <Layouts>
-      <div className="flex w-full flex-col md:flex-row ">
+      <div className="flex w-full flex-col md:flex-row dark:text-white ">
         <div className="md:w-3/6">
           <img src={sign} alt="SignIn image" className="w" />
         </div>

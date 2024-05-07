@@ -20,7 +20,7 @@ export default function TextOnImg({
     //     <Link to="">Shop now</Link>
     //   </div>
     // </div>
-    <div className="bg-black relative hover:scale-95 duration-300">
+    <div className="bg-black relative hover:scale-95 duration-300 dark:border">
       <img
         src={img}
         className="md:w-4/6 w-5/6 flex justify-center mx-auto  "

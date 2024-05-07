@@ -9,8 +9,8 @@ import Layouts from "../Components/Layouts";
 
 export default function About() {
   return (
-    <Layouts className="bg-white">
-      <div className="flex flex-col md:flex-row justify-between m-4">
+    <Layouts className="bg-white dark:text-white">
+      <div className="flex flex-col md:flex-row justify-between ">
         <div className="flex flex-1 flex-col text-xl justify-center px-6">
           <h1 className="text-3xl font-semibold">Our Story</h1>
           <p className="py-4">
@@ -30,7 +30,7 @@ export default function About() {
           <img src={AboutImg} alt="" />
         </div>
       </div>
-      <div className="flex md:flex-row flex-col justify-around my-14">
+      <div className="flex md:flex-row flex-col justify-around py-14">
           <Featured
             img={Delivery}
             header="FREE AND FAST DELIVERY"
