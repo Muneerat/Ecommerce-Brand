@@ -76,7 +76,6 @@ export default function () {
         </div> 
       </div>
     <Layouts>
-      {/* <div className='h-1 w-full bg-slate-200'></div> */}
       {/* <Categories /> */}
       <div className="pt-5">
         <Tabs text="Today's" />

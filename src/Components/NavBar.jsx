@@ -9,6 +9,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { HiX } from "react-icons/hi";
 import Links from './Links';
 import { AppContext } from '../Contexts/AppContent';
+import { MdLightMode } from "react-icons/md";
+import { IoMoonOutline } from "react-icons/io5";
 
 export default function NavBar({item}) {
    
@@ -17,7 +19,7 @@ export default function NavBar({item}) {
     const {cart,totalItems,scrollToTop} = useContext(AppContext)
   return (
    
-    <div className={`${darkMode ? '' : 'w-full sticky top-0 left-0 z-30 bg-white  items-center mx-auto p-2 border-b-2 border-slate-200'} `}>
+    <div className={`w-full sticky top-0 left-0 z-30 bg-white dark:bg-black dark:text-white  items-center mx-auto p-2 border-b-2 border-slate-200`}>
     <div className="flex justify-between p-5 max-w-screen-2xl items-center mx-auto">
     <div className="order-2 md:order-none">
     <Link to="/"   onClick={scrollToTop}>
@@ -43,13 +45,7 @@ export default function NavBar({item}) {
         </ul> 
      <button className='flex md:hidden' onClick={ () => setOpenMenu(!openMenu)}>
     { openMenu ?  <GiHamburgerMenu size={30} /> :  <HiX size={30} /> }
-       {/* <GiHamburgerMenu size={30} />  */}
-       {/* <HiX /> */}
      </button>
-     {/* <button onClick={toggleTheme}
-     >
-      {darkMode ? "darkMode" : "lightmode"}
-     </button> */}
     </div>
     <div className='flex items-center order-3'>
       {/* <form className=' items-center hidden md:flex '>
@@ -60,6 +56,10 @@ export default function NavBar({item}) {
        afterContent={<IoSearch />}
        />
       </form> */}
+      <button onClick={toggleTheme}
+     >
+      {darkMode ?  <MdLightMode size={25} className=' text-white' /> : <IoMoonOutline size={25} />}
+     </button>
       <span className='px-5'><MdOutlineFavoriteBorder size={25} /></span> 
       <div>
       <Link to="/cart" >
