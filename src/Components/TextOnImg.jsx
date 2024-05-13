@@ -28,7 +28,7 @@ export default function TextOnImg({
       <div className="absolute bottom-5 left-5 w-3/5 text">
         <h1 className="text-xl">{header}</h1>
         <p className="py-1 text-xs">{text}</p>
-        <Link to="" className="border-b-2">Shop now</Link>
+        <Link to="products/allProducts" className="border-b-2">Shop now</Link>
       </div>
     </div>
   );
