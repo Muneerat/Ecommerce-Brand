@@ -42,9 +42,9 @@ export default function ProductCard({ product }) {
             </button>
           )}
         </div>
-        <div className="p-3">
+        <div className="p-3 dark:text-white">
           <p>{product.title.substring(0, 22)}</p>
-          <p className="text-slate-700">${product.price}</p>
+          <p className="text-slate-700 dark:text-white">${product.price}</p>
         </div>
       
     </div>

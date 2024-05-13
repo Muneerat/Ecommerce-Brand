@@ -35,11 +35,6 @@ function App() {
 
 
 
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0)
-  // }, [pathname])
-
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -128,7 +123,7 @@ function App() {
         } else {
           return item;
         }
-      })
+       })
       setCart(newCart);
       setNotice({ message: `${cartItem.title} in cart increased.`, type: "success" });
   
@@ -215,11 +210,6 @@ function App() {
       window.scrollTo(0, 0)
     
   }
-
-    // const handleHome = () => {
-    //   Navigate('')
-    //   setNotice({ message: "You are on the home page", type: "success" });
-    // }
   useEffect(() => {
     getCart();
     if (notice.message) {
@@ -237,10 +227,10 @@ function App() {
   }, [notice]);
 
   return (
-    <div className={darkMode ? "app dark" : "dark"}>
+    <div className={`${darkMode ? 'dark' : ''}`}>
       <AppContext.Provider
         value={{
-          cart,
+           cart,
           setCart,
           addToCart: addToCart,
           setNotice,

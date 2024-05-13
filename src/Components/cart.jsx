@@ -6,6 +6,7 @@ import RemoveItem from "./removeItem";
 import { GrCart } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
+import Layouts from "./Layouts";
 
 export default function Cart() {
   const navigate = useNavigate()
@@ -17,7 +18,9 @@ export default function Cart() {
  }
 
   return (
-    <div className="mx-5 p-5">
+    <Layouts>
+
+    <div className="mx-5 p-5 dark:bg-slate-950 dark:text-white">
     {cart.length < 1 ? <div className="flex justify-center h-[520px] items-center">
       <div className="text-center">
       <GrCart size={180}/>
@@ -81,6 +84,7 @@ export default function Cart() {
       
      
     </div>
+    </Layouts>
   );
 }
 

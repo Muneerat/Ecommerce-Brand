@@ -66,7 +66,7 @@ export default function () {
           backgroundImage: `url(${BgImg})`,
         }}
       >
-        <div className="p-10 md:pl-20 flex flex-col my-auto justify-center align-middle pt-32 ">
+        <div className="p-10 md:pl-20 flex flex-col my-auto justify-center align-middle pt-28 ">
           <h1 className="flex py-4 text-2xl font-light text-[#0f1235]">Introducing </h1>
           <h2 className="font-bold py-5 text-3xl md:text-8xl text-[#0f1235]" ref={el}></h2>
           <Link to="/allProducts">
@@ -76,7 +76,6 @@ export default function () {
         </div> 
       </div>
     <Layouts>
-      {/* <div className='h-1 w-full bg-slate-200'></div> */}
       {/* <Categories /> */}
       <div className="pt-5">
         <Tabs text="Today's" />
@@ -125,7 +124,7 @@ export default function () {
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col justify-around my-12">
+        <div className="flex md:flex-row flex-col justify-around py-12" >
           <Featured
             img={Delivery}
             header="FREE AND FAST DELIVERY"
