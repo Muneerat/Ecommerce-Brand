@@ -19,7 +19,7 @@ export default function NavBar({item}) {
     const {cart,totalItems,scrollToTop} = useContext(AppContext)
   return (
    
-    <div className={`w-full sticky top-0 left-0 z-30 bg-white dark:bg-black dark:text-white  items-center mx-auto p-2 border-b-2 border-slate-200`}>
+    <div className={`w-full sticky top-0 left-0 z-30 bg-white dark:bg-slate-950 dark:text-white  items-center mx-auto p-2 border-b-2 border-slate-200`}>
     <div className="flex justify-between p-5 max-w-screen-2xl items-center mx-auto">
     <div className="order-2 md:order-none">
     <Link to="/"   onClick={scrollToTop}>

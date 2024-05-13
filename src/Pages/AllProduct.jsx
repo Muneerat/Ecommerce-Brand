@@ -48,7 +48,7 @@ export default function AllProduct() {
           <h1 className="flex py-4 text-base md:text-6xl font-bold text-center my-auto  text-[#fff]">All Products </h1>
         </div> 
       </div>
-    <div className="flex flex-col md:flex-row max-wl dark:bg-black">
+    <div className="flex flex-col md:flex-row max-wl dark:bg-slate-950">
       <div className=" shadow-md md:w-2/12 m-3 p-3">
         <div className="flex my-3">
           <IoFilterOutline size={22} className="p-1 " />

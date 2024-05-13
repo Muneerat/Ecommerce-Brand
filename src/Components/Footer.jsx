@@ -24,7 +24,7 @@ export default function Footer() {
     // setNotice({ message: "You are on the home page", type: "success" });
   }
   return (
-    <div className="bg-white dark:bg-black dark:text-white">
+    <div className="bg-white dark:bg-slate-950 dark:text-white">
       <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 gap-3 p-8  items-center md:justify-items-center">
         <div>
         <Link onClick={scrollToTop} to="/">
@@ -78,7 +78,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-primary-light dark:bg-black p-2 text-center ">
+      <div className="bg-primary-light dark:bg-slate-950 p-2 text-center ">
         <p>© {currentYear} Ecommerce. All right reserved. Design by munie.</p>
       </div>
     </div>

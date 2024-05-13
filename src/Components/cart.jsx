@@ -20,7 +20,7 @@ export default function Cart() {
   return (
     <Layouts>
 
-    <div className="mx-5 p-5 dark:bg-black dark:text-white">
+    <div className="mx-5 p-5 dark:bg-slate-950 dark:text-white">
     {cart.length < 1 ? <div className="flex justify-center h-[520px] items-center">
       <div className="text-center">
       <GrCart size={180}/>

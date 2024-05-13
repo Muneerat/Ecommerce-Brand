@@ -123,7 +123,7 @@ function App() {
         } else {
           return item;
         }
-      })
+       })
       setCart(newCart);
       setNotice({ message: `${cartItem.title} in cart increased.`, type: "success" });
   
