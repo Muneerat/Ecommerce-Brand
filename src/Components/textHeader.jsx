@@ -3,7 +3,7 @@ import React from 'react'
 export default function TextHeader({ text}) {
   return (
     <div>
-        <h1 className='py-4 text-2xl md:text-3xl font-bold'>{text}</h1>
+        <h1 className='py-4 text-2xl md:text-3xl font-bold dark:text-white'>{text}</h1>
     </div>
   )
 }
