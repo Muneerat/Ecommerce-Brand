@@ -58,7 +58,7 @@ export default function Footer() {
             <Link onClick={scrollToTop} to="/about" className="py-1 hover:translate-x-3 transition-all duration-200">
               About
             </Link>
-            <Link onClick={scrollToTop} to="/allProducts" className="py-1 hover:translate-x-3 transition-all duration-200">
+            <Link onClick={scrollToTop} to="/products/allProducts" className="py-1 hover:translate-x-3 transition-all duration-200">
               Product
             </Link>
           </div>

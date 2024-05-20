@@ -24,9 +24,11 @@ export default function SingleProduct() {
   useEffect(() => {
     SingleProduct();
   }, [Params.id]);
+
+  const currentCartItem = cart.find((item) => item.id === product.id)
   return (
     <Layouts className=" p-0">
-      <div className="md:h-[70vh] flex flex-col md:flex-row justify-evenly p-6 bg-primary-light">
+      <div className="md:h-screen flex flex-col md:flex-row justify-evenly p-6 bg-primary-light">
         <div className=" p-3 md:w-2/4 flex justify-center bg-white">
           <img className=" w-3/6" src={product.image} alt={product.title} />
         </div>
@@ -51,21 +53,26 @@ export default function SingleProduct() {
               XL
             </button>
           </div>
+          {currentCartItem ? (
+            <div className="flex my-4">
+              <button onClick={() => decreaseItem(currentCartItem.id)} className="border bg-primary text-white py-1 px-3">-</button>
+              <button className="border py-1 px-3">{currentCartItem.amount}</button>
+              <button onClick={() => increaseItem(currentCartItem.id)} className="border bg-primary text-white py-1 px-3">+</button>
+            </div>
+          ) : (
+            <button
+              className="transition-all rounded-md duration-300 bg-primary w-full text-white py-2 my-3"
+              onClick={() => addToCart(product)}
+            >
+              Add to cart
+            </button>
+          )}
           
-          {cart.map((item,index) => {
-            return(
-              <div className="flex flex-1 my-4" key={index}>
-                <button onClick={() => decreaseItem(item.id)} className="border bg-primary text-white py-1 px-3">-</button>
-                <button className="border py-1 px-3">{item?.amount}</button>
-                <button onClick={() => increaseItem(item.id)} className="border bg-primary text-white py-1 px-3">+</button>
-                </div>
-            ) 
-          })}
-          <button className="transition-all rounded-md duration-300 bg-primary w-full text-white py-2 my-3" onClick={() => addToCart()} >Add to cart</button>
          
         </div>
         {/* { isHover == index && <button className='absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white'>Add to cart</button>} */}
       </div>
+     
     </Layouts>
   );
 }

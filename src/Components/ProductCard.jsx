@@ -13,8 +13,6 @@ export default function ProductCard({ product }) {
   const [isHover, setHover] = useState('');
   return (
     <div>
-    {/* {`${product.id}`} */}
-     
         <div
           className=" shadow-xl relative h-3/4 bg-white hover:scale-105 hover:backdrop-blur-none duration-300 backdrop-blur transition-all ease-in-out"
           onMouseEnter={() => setHover(product.id)}
