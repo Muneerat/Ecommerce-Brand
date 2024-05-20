@@ -62,13 +62,14 @@ function App() {
     axios
       .get("https://fakestoreapi.com/products")
       .then((res) => {
+        console.log("done")
         setOurProducts(res.data);
       })
       .catch((error) => {
         console.error(error);
       })
       .finally(() => {
-        c(false);
+        setLoading(false);
       });
   };
   useEffect(() => {
