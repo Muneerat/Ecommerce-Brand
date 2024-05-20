@@ -68,7 +68,7 @@ function App() {
         console.error(error);
       })
       .finally(() => {
-        setLoading(false);
+        c(false);
       });
   };
   useEffect(() => {
