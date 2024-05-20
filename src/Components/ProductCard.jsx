@@ -25,9 +25,9 @@ export default function ProductCard({ product }) {
             <FaRegHeart className="my-3 hover:text-black" />
             {/* <HiEye className="my-3 hover:text-black " /> */}
           </div>
-          <div className="flex justify-center pt-5">
+          <div className="flex justify-center pt-5 w-full h-full">
             <img
-              className=" w-2/5 p-3 flex "
+              className=" w-2/5 p-3 flex object-contain "
               src={image}
               alt={title}
             />
