@@ -50,7 +50,7 @@ export default function Cart() {
               <div className="flex flex-col w-full md:ml-4">
               <div className="flex justify-between mb-2">
               {/* <Link to={`/${item?.id}`}>{item?.title}</Link> */}
-                <h2 className="">{item.title.substring(0, 20)}</h2>
+                <h2 className="">{item?.title}</h2>
               <RemoveItem product={item.id} />
               </div>
               <div className="flex ">

@@ -61,8 +61,7 @@ function App() {
     setLoading(true);
     axios
       .get("https://fakestoreapi.com/products")
-      .then((res) => {
-        console.log("done")
+      .then((res) => {``
         setOurProducts(res.data);
       })
       .catch((error) => {
@@ -126,7 +125,7 @@ function App() {
         }
        })
       setCart(newCart);
-      setNotice({ message: `${cartItem.title} in cart increased.`, type: "success" });
+      setNotice({ message: `Item in cart increased.`, type: "success" });
   
     }else{
       setCart([...cart, newItem])
@@ -163,12 +162,12 @@ function App() {
       }
     });
     setCart(newCart);
-    setNotice({ message: `${cartItem.title} decrease from cart.`, type: "error" });
+    setNotice({ message: `Item decrease from cart.`, type: "error" });
 
   }
     if (cartItem.amount < 2) {
       removeItem(id);
-      setNotice({ message: `${cartItem.title} removed from cart.`, type: "error" });
+      setNotice({ message: `Item removed from cart.`, type: "error" });
     }
   };
 
