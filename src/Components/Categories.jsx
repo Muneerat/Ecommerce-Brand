@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { GiClothes } from "react-icons/gi";
-import { AiFillAlipayCircle } from "react-icons/ai";
 import electronics from "../assets/electronics.png";
 import Logo from "../assets/logo.png";
 import jewelery from "../assets/Jewelery.png";

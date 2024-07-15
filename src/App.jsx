@@ -1,5 +1,3 @@
-//import { useState, useContext } from 'react';
-// import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import { BrowserRouter as Router, Link, Routes, Route, useLocation } from "react-router-dom";
 import { AppContext } from "./Contexts/AppContent";
 import NavBar from "./Components/NavBar";
