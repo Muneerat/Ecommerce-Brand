@@ -54,7 +54,7 @@ export default function Cart() {
                         />
                       </Link>
                       <div className="flex flex-col w-full md:ml-4">
-                        <div className="flexs md:grid-cols-2  grid justify-between mb-2">
+                        <div className=" md:grid-cols-2  grid justify-between mb-2">
                           {/* <Link to={`/${item?.id}`}>{item?.title}</Link> */}
                           <h2 className="w-1/5">{item?.title}</h2>
                           <RemoveItem product={item.id} />
