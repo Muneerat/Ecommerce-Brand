@@ -15,4 +15,26 @@
     border-radius: 50vw;
     background: #0D6EFD;
   }
+  .scroll-x-container {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents line breaks inside the container */
+  }
+  
+  .scroll-x-item {
+    display: inline-block; /* Ensures items are displayed inline to enable scrolling */
+  }
+  /* Ensure the container allows horizontal scrolling */
+.scroll-x-container {
+  display: flex; /* Use flexbox for horizontal alignment */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding: 10px 0; /* Add padding for better visual spacing */
+}
+
+/* Each item should have a fixed width and margin */
+.scroll-x-item {
+  flex: 0 0 auto; /* Prevent items from shrinking or growing */
+  margin-right: 16px; /* Add margin between items */
+  min-width: 200px; /* Set a minimum width for items */
+}
+
   

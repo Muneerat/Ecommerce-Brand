@@ -96,6 +96,7 @@ export default function SingleProduct() {
             </button>
           </div>
           {currentCartItem ? (
+            <div>
             <div className="flex my-4">
               <button
                 onClick={() => decreaseItem(currentCartItem.id)}
@@ -113,6 +114,13 @@ export default function SingleProduct() {
                 +
               </button>
             </div>
+            <Link  to="/cart">
+            <Button text='View Cart' className='bg-primary text-white'>
+            </Button>
+            </Link>
+            
+            </div>
+            
           ) : (
             <button
               className="transition-all rounded-md duration-300 bg-primary w-full text-white py-2 my-3"
@@ -126,8 +134,8 @@ export default function SingleProduct() {
       </div>
     )}
      
-      <h1 className="font-normal text-2xl py-5">Things you might like</h1>
-      <div className="grid grid-cols-4 gap-10">
+      <h1 className="font-normal text-2xl py-5 px-3">Things you might like</h1>
+      <div className="grid md:grid-cols-4 grid-cols-2 m-4  gap-10">
         {ourProductsRandom.slice(0, 4).map((product) => (
           <div
             onMouseEnter={() => setHover(product.id)}
