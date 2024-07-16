@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import Layouts from "../Components/Layouts";
 import Button from "../Components/Button";
 import { AppContext } from "../Contexts/AppContent";
@@ -11,16 +11,18 @@ export default function SingleProduct() {
   const [product, setProducts] = useState([]);
   const Params = useParams();
   const [ourProductsRandom, setOurProductsRandom] = useState([]);
-  const { cart, addToCart, increaseItem, decreaseItem, totalPrice } =
+  const { cart, addToCart, increaseItem, decreaseItem } =
     useContext(AppContext);
   const [isHover, setHover] = useState("");
+  const navigate = useNavigate();
 
   function shuffleArray(array) {
-    for (let i = array.length - 1; i >= 0; i--) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i >= 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[i], array[j]];
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-    return array;
+    return newArray;
   }
 
   //Get all products
@@ -43,7 +45,6 @@ export default function SingleProduct() {
     axios
       .get(`https://fakestoreapi.com/products/${Params.id}`)
       .then((res) => {
-        // console.log(res.data)
         setProducts(res.data);
       })
       .catch((error) => {
@@ -55,17 +56,18 @@ export default function SingleProduct() {
     getOurRandomProducts();
   }, [Params.id]);
 
-  const handleProductClick = () => {
-    const shuffleProduct = shuffleArray([...ourProductsRandom]);
-    setOurProductsRandom(shuffleProduct);
-    Navigate(`/products/${product.id}`);
+  const handleProductClick = (productId) => {
+    // const shuffleProduct = shuffleArray([...ourProductsRandom]);
+    // setOurProductsRandom(shuffleProduct);
+    navigate(`/products/${productId}`);
   };
 
   const currentCartItem = cart.find((item) => item.id === product.id);
   return (
     <Layouts className=" p-0">
-      <div className="md:h-screen flex flex-col md:flex-row justify-evenly p-6 bg-primary-light">
-        <div className="h-1/6 p-3 md:w-2/4 flex justify-center bg-white">
+    {product && (
+      <div className=" flex flex-col md:flex-row justify-evenly p-6 bg-primary-light">
+        <div className="p-3 md:w-2/4 flex justify-center bg-white">
           <img className="w-3/6" src={product.image} alt={product.title} />
         </div>
         <div className="p-3 md:w-2/5 bg-primary-light">
@@ -122,14 +124,18 @@ export default function SingleProduct() {
         </div>
         {/* { isHover == index && <button className='absolute bottom-0 p-1 transition-all duration-300 bg-black w-full text-white'>Add to cart</button>} */}
       </div>
+    )}
+     
+      <h1 className="font-normal text-2xl py-5">Things you might like</h1>
       <div className="grid grid-cols-4 gap-10">
-        {ourProductsRandom.slice(0,4).map((product) => (
-          <div>
-            <div
-              className=" shadow-xl relative h-3/4 bg-white hover:scale-105 hover:backdrop-blur-none duration-300 backdrop-blur transition-all ease-in-out"
-              onMouseEnter={() => setHover(product.id)}
-              onMouseLeave={() => setHover("")}
-            >
+        {ourProductsRandom.slice(0, 4).map((product) => (
+          <div
+            onMouseEnter={() => setHover(product.id)}
+            onMouseLeave={() => setHover("")}
+            onClick={() => handleProductClick(product.id)}
+            key={product.id}
+          >
+            <div className=" shadow-xl relative h-3/4 bg-white hover:scale-105 hover:backdrop-blur-none duration-300 backdrop-blur transition-all ease-in-out">
               <Link to={`/products/${product.id}`} className="">
                 <div className="right-4 absolute text-primary ">
                   <FaRegHeart className="my-3 hover:text-black" />
