@@ -64,7 +64,7 @@ export default function SingleProduct() {
 
   const currentCartItem = cart.find((item) => item.id === product.id);
   return (
-    <Layouts className=" p-0">
+    <Layouts className=" p-0 ">
     {product && (
       <div className=" flex flex-col md:flex-row justify-evenly p-6 bg-primary-light">
         <div className="p-3 md:w-2/4 flex justify-center bg-white">

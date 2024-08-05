@@ -54,9 +54,9 @@ export default function Cart() {
                         />
                       </Link>
                       <div className="flex flex-col w-full md:ml-4">
-                        <div className=" md:grid-cols-2  grid justify-between mb-2">
+                        <div className="grid-cols-2  grid justify-between mb-2">
                           {/* <Link to={`/${item?.id}`}>{item?.title}</Link> */}
-                          <h2 className="w-1/5">{item?.title}</h2>
+                          <h2 className="w-">{item?.title}</h2>
                           <RemoveItem product={item.id} />
                         </div>
                         <div className="flex ">
@@ -106,15 +106,15 @@ export default function Cart() {
               </div>
               <div className="flex flex-col md:flex-row w-full justify-between justify-items-center">
                 <div>
-                  <Link to="">
-                    <Button text="Checkout" className="bg-primary text-white" />
+                  <Link to="/checkout">
+                    <Button text="Checkout" className="bg-primary text-white w-full" />
                   </Link>
                 </div>
                 <div>
                   <Link to="/products/allProducts">
                     <Button
                       text="Back to shop"
-                      className="border-primary border  text-primary hover:bg-white"
+                      className="border-primary border  text-primary hover:bg-white w-full"
                     />
                   </Link>
                 </div>

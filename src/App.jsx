@@ -14,6 +14,7 @@ import toast, { Toaster } from "react-hot-toast";
 import AllProduct from "./Pages/AllProduct";
 import Cart from "./Components/cart";
 import NotFound from "./Pages/NotFound";
+import Checkout from "./Pages/Checkout";
 
 function App() {
   // const [loading, setLoading] = useState(false);
@@ -272,7 +273,9 @@ function App() {
             </Route>
             <Route path="/cart" element={<Cart />}/>
             <Route path="*" element={<NotFound />}/>
+            <Route path="/checkout" element={<Checkout/>}></Route>
           </Routes>
+          
           <Footer />
         </Router>
       </AppContext.Provider>
