@@ -1,4 +1,4 @@
-export default function FormInput({
+export default function Input({
     setData,
     className= '',
     type='text',
@@ -10,7 +10,7 @@ export default function FormInput({
     
         <input
             type={type}
-            className={`form-input py-1 px-4 outline-none border-none w-full block bg-inherit pl-5 pr-6  ${className}`}
+            className={`form-input py-1 px-4 outline-none w-full block bg-inherit pl-5 pr-6 border-slate-500 border-2  ${className}`}
             placeholder={placeholder}
             // onChange={(e) => setData(e.target.value)}
             {...props}
