@@ -7,6 +7,8 @@ import Men from "../assets/men.png";
 import Women from "../assets/Women.png";
 import TextHeader from "./textHeader";
 import { AppContext } from "../Contexts/AppContent";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Categories() {
   const {categories} = useContext(AppContext);
@@ -17,11 +19,16 @@ export default function Categories() {
     "women's clothing": Women,
     "men's clothing": Men,
   };
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  },[]);
 
   return (
     <div>
       <TextHeader text="Browse By Category" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 cursor-pointer items-center justify-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 cursor-pointer items-center justify-center"
+           data-aos="zoom-in">
         {categories.map((category, index) => {
           return (
             <div

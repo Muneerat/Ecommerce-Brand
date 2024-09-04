@@ -252,8 +252,7 @@ function App() {
 
         }}
       >
-        {/* <Toaster/> */}
-        {/* <ToastContainer />  */}
+     
         <Toaster />
         <Router>
           <NavBar />
@@ -273,6 +272,7 @@ function App() {
             <Route path="/cart" element={<Cart />}/>
             <Route path="*" element={<NotFound />}/>
           </Routes>
+          
           <Footer />
         </Router>
       </AppContext.Provider>

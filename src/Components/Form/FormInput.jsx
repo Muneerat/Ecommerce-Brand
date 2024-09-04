@@ -3,6 +3,7 @@ export default function FormInput({
     className= '',
     type='text',
     afterContent='',
+    placeholder,
     ...props
 }) {
     return (
@@ -10,6 +11,7 @@ export default function FormInput({
         <input
             type={type}
             className={`form-input py-1 px-4 outline-none border-none w-full block bg-inherit pl-5 pr-6  ${className}`}
+            placeholder={placeholder}
             // onChange={(e) => setData(e.target.value)}
             {...props}
         />
