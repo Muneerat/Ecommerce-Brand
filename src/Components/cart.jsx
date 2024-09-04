@@ -90,36 +90,53 @@ export default function Cart() {
                 );
               })}
             </div>
-            <div className="flex flex-col gap-y-3 py-4 mt-4">
-              <div className="flex w-full justify-between justify-items-center">
-                <div>
-                  <div className="uppercase font-semibold">
-                    <span className="mr-2">Total:</span>${totalPrice.toFixed(2)}
-                  </div>
-                </div>
+            <div className="flex justify-between gap-y-3 w-full py-4 mt-4">
+              <div className="flex flex-col">
                 <div
                   onClick={emptyCart}
                   className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
                 >
                   <FiTrash2 />
                 </div>
+                <Link to="/products/allProducts">
+                  <Button
+                    text="Back to shop"
+                    className="border-primary border  text-primary hover:bg-white w-full"
+                  />
+                </Link>
               </div>
-              <div className="flex flex-col md:flex-row w-full justify-between justify-items-center">
+              <div className="flex flex-col md:flex-row justify-end justify-items-center w-1/5 border rounded-lg ">
+              <div className="bg-white p-4 w-full gap-6">
+                    <div className="flex justify-between text-gray-600 py-1">
+                      <span>Subtotal:</span>${totalPrice.toFixed(2)}
+                    </div>
+                    <div className="flex justify-between text-gray-600 py-1">
+                      <span>Tax:</span>$7.00
+                    </div>
+                    <div className="h-[1px] w-full bg-gray-400 my-4"></div>
+                    <div className="uppercase font-semibold flex justify-between py-2">
+                      <span className="mr-2">Tax:</span>$
+                      {(totalPrice + 7).toFixed(2)}
+                    </div>
+                  </div>
                 <div>
-                  <Link to="/checkout">
-                    <Button text="Checkout" className="bg-primary text-white w-full" />
-                  </Link>
-                </div>
-                <div>
-                  <Link to="/products/allProducts">
+                  {/* <Link to="/products/allProducts">
                     <Button
                       text="Back to shop"
                       className="border-primary border  text-primary hover:bg-white w-full"
                     />
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
+            {/* <div className=" flex flex-row justify-end w-5/6 bg-white ">
+            <div className="bg-white ">
+              <div className="">
+                <span>Subtotal:</span>${totalPrice.toFixed(2)}
+              </div>
+
+            </div>
+            </div> */}
           </div>
         )}
       </div>
