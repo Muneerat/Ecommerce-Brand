@@ -1,17 +1,26 @@
-import React from "react";
-import AboutImg from '../assets/about.png'
+import React, { useEffect } from "react";
+import AboutImg from "../assets/about.png";
 import Featured from "../Components/Featured";
 import Delivery from "../assets/icon-delivery.svg";
 import IconCustomer from "../assets/Icon-Customer.svg";
 import IconSecure from "../assets/Icon-secure.svg";
 import ps5 from "../assets/ps5.svg";
 import Layouts from "../Components/Layouts";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function About() {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []); 
   return (
     <Layouts className="bg-white dark:text-white">
       <div className="flex flex-col md:flex-row justify-between ">
-        <div className="flex flex-1 flex-col text-xl justify-center px-6">
+        <div
+          className="flex flex-1 flex-col text-xl justify-center px-6"
+          data-aos="zoom-in-right"
+        >
           <h1 className="text-3xl font-semibold">Our Story</h1>
           <p className="py-4">
             Launched in 2015, Exclusive is South Asia’s premier online shopping
@@ -26,27 +35,27 @@ export default function About() {
             ranging from consumer.
           </p>
         </div>
-        <div className="flex flex-1">
+        <div className="flex flex-1" data-aos="zoom-in-left">
           <img src={AboutImg} alt="" />
         </div>
       </div>
       <div className="flex md:flex-row flex-col justify-around py-14">
-          <Featured
-            img={Delivery}
-            header="FREE AND FAST DELIVERY"
-            text="Free delivery for all orders over $140"
-          />
-          <Featured
-            img={IconCustomer}
-            header="24/7 CUSTOMER SERVICE"
-            text="Friendly 24/7 customer support"
-          />
-          <Featured
-            img={IconSecure}
-            header="MONEY BACK GUARANTEE"
-            text="We return money within 30 days"
-          />
-        </div>
+        <Featured
+          img={Delivery}
+          header="FREE AND FAST DELIVERY"
+          text="Free delivery for all orders over $140"
+        />
+        <Featured
+          img={IconCustomer}
+          header="24/7 CUSTOMER SERVICE"
+          text="Friendly 24/7 customer support"
+        />
+        <Featured
+          img={IconSecure}
+          header="MONEY BACK GUARANTEE"
+          text="We return money within 30 days"
+        />
+      </div>
     </Layouts>
   );
 }

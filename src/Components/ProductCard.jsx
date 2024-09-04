@@ -1,20 +1,27 @@
 import Button from "./Button";
 import { HiEye } from "react-icons/hi";
 import { FaRegHeart } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../Contexts/AppContent";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 export default function ProductCard({ product }) {
   const {addToCart} = useContext(AppContext); 
   const { id, image, category, title, price } = product;
   const [isHover, setHover] = useState('');
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  },[]);
   return (
     <div>
         <div
           className=" shadow-xl relative h-3/4 bg-white hover:scale-105 hover:backdrop-blur-none duration-300 backdrop-blur transition-all ease-in-out"
+          data-aos="zoom-in-up"
           onMouseEnter={() => setHover(product.id)}
           onMouseLeave={() => setHover('')}
         >

@@ -44,20 +44,6 @@ export default function () {
      };
    }, []);
  
-  //  useEffect(() => {
-  //   const options = {
-  //     strings: ['Hello, World!', 'Welcome to my website!'],
-  //     typeSpeed: 50,
-  //     backSpeed: 50,
-  //     loop: true
-  //   };
-  
-  //   const typed = new Typed(typeRef.current, options);
-  
-  //   return () => {
-  //     typed.destroy();
-  //   };
-  // }, []);
   return (
     <>
       <div
