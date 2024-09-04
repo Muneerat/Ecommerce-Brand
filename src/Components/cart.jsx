@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../Contexts/AppContent";
 import { Link, Navigate } from "react-router-dom";
 import RemoveItem from "./removeItem";
@@ -8,14 +8,31 @@ import { useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 import Layouts from "./Layouts";
 import Button from "./Button";
+import { PaystackButton } from "react-paystack";
+import paypal from "../assets/paypal.png"
 
 export default function Cart() {
+  const publicKey = "pk_test_26405a72d3464371cbac1222bf0dc4b44ac0d767";
+  const [email, setEmail] = useState("ola@gmail.com");
   const navigate = useNavigate();
   const { cart, emptyCart, addToCart, increaseItem, decreaseItem, totalPrice } =
     useContext(AppContext);
+  const amount = (totalPrice + 7.00) * 100;
 
   const navHome = () => {
     navigate("/");
+  };
+  const componentProps = {
+    email,
+    amount,
+    metadata: {
+      email: "ola@gmail.com",
+    },
+    publicKey,
+    text: "Pay Now",
+    onSuccess: () =>
+      alert("Thanks for doing business with us! Come back soon!!"),
+    onClose: () => alert("Wait! Don't leave :("),
   };
 
   return (
@@ -90,7 +107,7 @@ export default function Cart() {
                 );
               })}
             </div>
-            <div className="flex justify-between gap-y-3 w-full py-4 mt-4">
+            <div className="md:flex justify-between gap-y-3 w-full py-4 mt-4">
               <div className="flex flex-col">
                 <div
                   onClick={emptyCart}
@@ -105,38 +122,38 @@ export default function Cart() {
                   />
                 </Link>
               </div>
-              <div className="flex flex-col md:flex-row justify-end justify-items-center w-1/5 border rounded-lg ">
-              <div className="bg-white p-4 w-full gap-6">
-                    <div className="flex justify-between text-gray-600 py-1">
-                      <span>Subtotal:</span>${totalPrice.toFixed(2)}
-                    </div>
-                    <div className="flex justify-between text-gray-600 py-1">
-                      <span>Tax:</span>$7.00
-                    </div>
-                    <div className="h-[1px] w-full bg-gray-400 my-4"></div>
-                    <div className="uppercase font-semibold flex justify-between py-2">
-                      <span className="mr-2">Tax:</span>$
-                      {(totalPrice + 7).toFixed(2)}
+              <div className="flex flex-col md:flex-row justify-end justify-items-center md:w-1/5 border rounded-lg ">
+                <div className="bg-white p-4 w-full gap-6">
+                  <div className="flex justify-between text-gray-600 py-1">
+                    <span>Subtotal:</span>${totalPrice.toFixed(2)}
+                  </div>
+                  <div className="flex justify-between text-gray-600 py-1">
+                    <span>Tax:</span>$7.00
+                  </div>
+                  <div className="h-[1px] w-full bg-gray-400 my-4"></div>
+                  <div className="uppercase font-semibold flex justify-between py-2">
+                    <span className="mr-2">Total:</span>$
+                    {(totalPrice + 7).toFixed(2)}
+                  </div>
+                  <div>
+                    <Button className="bg-primary text-white w-full">
+                      <PaystackButton {...componentProps} />
+                    </Button>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="text-gray-600">
+                      Pay using PayPal 
+                    </span>
+                    <div className="border p-1 rounded-md">
+                    <img src={paypal} className="w-5 h-5"/>
+
                     </div>
                   </div>
+                </div>
                 <div>
-                  {/* <Link to="/products/allProducts">
-                    <Button
-                      text="Back to shop"
-                      className="border-primary border  text-primary hover:bg-white w-full"
-                    />
-                  </Link> */}
                 </div>
               </div>
             </div>
-            {/* <div className=" flex flex-row justify-end w-5/6 bg-white ">
-            <div className="bg-white ">
-              <div className="">
-                <span>Subtotal:</span>${totalPrice.toFixed(2)}
-              </div>
-
-            </div>
-            </div> */}
           </div>
         )}
       </div>
